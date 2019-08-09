@@ -80,7 +80,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\LocalNetwork.png" />
     <None Include="Resources\eraser %281%29.png" />
     <None Include="Resources\eraser.png" />
     <None Include="Resources\LocalNetwork.png" />
