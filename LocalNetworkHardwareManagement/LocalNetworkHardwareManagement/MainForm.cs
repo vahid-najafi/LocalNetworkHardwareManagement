@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LocalNetworkHardwareManagement.Core.Helpers;
 
 namespace LocalNetworkHardwareManagement
 {
@@ -122,6 +123,15 @@ namespace LocalNetworkHardwareManagement
 
         #endregion
 
-        
+        #region Form Load
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
+        }
+
+        #endregion
+
+
     }
 }
