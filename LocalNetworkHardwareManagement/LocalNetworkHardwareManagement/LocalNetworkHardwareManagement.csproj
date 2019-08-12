@@ -84,5 +84,15 @@
     <None Include="Resources\eraser.png" />
     <None Include="Resources\LocalNetwork.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalNetworkHardware.DataLayer\LocalNetworkHardware.DataLayer.csproj">
+      <Project>{4db78402-ddf2-4cb3-bf93-de576af22a0a}</Project>
+      <Name>LocalNetworkHardware.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LocalNetworkHardwareManagement.Core\LocalNetworkHardware.Core.csproj">
+      <Project>{f3ddde11-451a-40e9-9193-eeee97a6d152}</Project>
+      <Name>LocalNetworkHardware.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
