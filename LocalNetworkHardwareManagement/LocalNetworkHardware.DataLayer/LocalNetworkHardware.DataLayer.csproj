@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +46,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,11 +65,97 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CdROMs.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CPUs.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GPUs.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NetworkAdapters.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OpratingSystems.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Printers.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RAMs.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SoundCards.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Systems.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Entities\" />
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="LocalNetworkHardwareManagement_DB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LocalNetworkHardwareManagement_DB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>LocalNetworkHardwareManagement_DB.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DbModel.edmx.diagram">
+      <DependentUpon>DbModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

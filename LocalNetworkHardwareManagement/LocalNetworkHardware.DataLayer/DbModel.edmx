@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LocalNetworkHardwareManagement_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CdROMs">
+          <Key>
+            <PropertyRef Name="CdromId" />
+          </Key>
+          <Property Name="CdromId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MediaType" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CPUs">
+          <Key>
+            <PropertyRef Name="CpuId" />
+          </Key>
+          <Property Name="CpuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Cores" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="DiskName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AvailableSpace" Type="float" Nullable="false" />
+          <Property Name="TotalSpace" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GPUs">
+          <Key>
+            <PropertyRef Name="GpuId" />
+          </Key>
+          <Property Name="GpuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AdapterRAM" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NetworkAdapters">
+          <Key>
+            <PropertyRef Name="AdapterId" />
+          </Key>
+          <Property Name="AdapterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OpratingSystems">
+          <Key>
+            <PropertyRef Name="OsId" />
+          </Key>
+          <Property Name="OsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Architecture" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Printers">
+          <Key>
+            <PropertyRef Name="PrinterId" />
+          </Key>
+          <Property Name="PrinterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="IsLocal" Type="bit" Nullable="false" />
+          <Property Name="IsNetwork" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RAMs">
+          <Key>
+            <PropertyRef Name="RamId" />
+          </Key>
+          <Property Name="RamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Memory" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SoundCards">
+          <Key>
+            <PropertyRef Name="SoundCardId" />
+          </Key>
+          <Property Name="SoundCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="SystemId" />
+          </Key>
+          <Property Name="SystemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniqMotherBoardId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsOwned" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CdROMs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="CdROMs" Type="Self.CdROMs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="CdROMs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CPUs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="CPUs" Type="Self.CPUs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="CPUs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GPUs_GPUs">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="GPUs" Type="Self.GPUs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="GPUs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NetworkAdapters_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="NetworkAdapters" Type="Self.NetworkAdapters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="NetworkAdapters">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpratingSystems_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="OpratingSystems" Type="Self.OpratingSystems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="OpratingSystems">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Printers_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="Printers" Type="Self.Printers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="Printers">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAMs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="RAMs" Type="Self.RAMs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="RAMs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SoundCards_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="SoundCards" Type="Self.SoundCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="SoundCards">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalNetworkHardwareManagement_DBModelStoreContainer">
+          <EntitySet Name="CdROMs" EntityType="Self.CdROMs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CPUs" EntityType="Self.CPUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPUs" EntityType="Self.GPUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetworkAdapters" EntityType="Self.NetworkAdapters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpratingSystems" EntityType="Self.OpratingSystems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Printers" EntityType="Self.Printers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RAMs" EntityType="Self.RAMs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoundCards" EntityType="Self.SoundCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CdROMs_Systems" Association="Self.FK_CdROMs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="CdROMs" EntitySet="CdROMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CPUs_Systems" Association="Self.FK_CPUs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="CPUs" EntitySet="CPUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Systems" Association="Self.FK_Drivers_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GPUs_GPUs" Association="Self.FK_GPUs_GPUs">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="GPUs" EntitySet="GPUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NetworkAdapters_Systems" Association="Self.FK_NetworkAdapters_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="NetworkAdapters" EntitySet="NetworkAdapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpratingSystems_Systems" Association="Self.FK_OpratingSystems_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="OpratingSystems" EntitySet="OpratingSystems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Printers_Systems" Association="Self.FK_Printers_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Printers" EntitySet="Printers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAMs_Systems" Association="Self.FK_RAMs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="RAMs" EntitySet="RAMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SoundCards_Systems" Association="Self.FK_SoundCards_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="SoundCards" EntitySet="SoundCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocalNetworkHardwareManagement_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CdROMs">
+          <Key>
+            <PropertyRef Name="CdromId" />
+          </Key>
+          <Property Name="CdromId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MediaType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_CdROMs_Systems" FromRole="CdROMs" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="CPUs">
+          <Key>
+            <PropertyRef Name="CpuId" />
+          </Key>
+          <Property Name="CpuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cores" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_CPUs_Systems" FromRole="CPUs" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="DiskName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AvailableSpace" Type="Double" Nullable="false" />
+          <Property Name="TotalSpace" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_Drivers_Systems" FromRole="Drivers" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="GPUs">
+          <Key>
+            <PropertyRef Name="GpuId" />
+          </Key>
+          <Property Name="GpuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdapterRAM" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_GPUs_GPUs" FromRole="GPUs" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="NetworkAdapters">
+          <Key>
+            <PropertyRef Name="AdapterId" />
+          </Key>
+          <Property Name="AdapterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_NetworkAdapters_Systems" FromRole="NetworkAdapters" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="OpratingSystems">
+          <Key>
+            <PropertyRef Name="OsId" />
+          </Key>
+          <Property Name="OsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Architecture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_OpratingSystems_Systems" FromRole="OpratingSystems" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="Printers">
+          <Key>
+            <PropertyRef Name="PrinterId" />
+          </Key>
+          <Property Name="PrinterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsLocal" Type="Boolean" Nullable="false" />
+          <Property Name="IsNetwork" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_Printers_Systems" FromRole="Printers" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="RAMs">
+          <Key>
+            <PropertyRef Name="RamId" />
+          </Key>
+          <Property Name="RamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Memory" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_RAMs_Systems" FromRole="RAMs" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="SoundCards">
+          <Key>
+            <PropertyRef Name="SoundCardId" />
+          </Key>
+          <Property Name="SoundCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_SoundCards_Systems" FromRole="SoundCards" ToRole="Systems" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="SystemId" />
+          </Key>
+          <Property Name="SystemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniqMotherBoardId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsOwned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CdROMs" Relationship="Self.FK_CdROMs_Systems" FromRole="Systems" ToRole="CdROMs" />
+          <NavigationProperty Name="CPUs" Relationship="Self.FK_CPUs_Systems" FromRole="Systems" ToRole="CPUs" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Systems" FromRole="Systems" ToRole="Drivers" />
+          <NavigationProperty Name="GPUs" Relationship="Self.FK_GPUs_GPUs" FromRole="Systems" ToRole="GPUs" />
+          <NavigationProperty Name="NetworkAdapters" Relationship="Self.FK_NetworkAdapters_Systems" FromRole="Systems" ToRole="NetworkAdapters" />
+          <NavigationProperty Name="OpratingSystems" Relationship="Self.FK_OpratingSystems_Systems" FromRole="Systems" ToRole="OpratingSystems" />
+          <NavigationProperty Name="Printers" Relationship="Self.FK_Printers_Systems" FromRole="Systems" ToRole="Printers" />
+          <NavigationProperty Name="RAMs" Relationship="Self.FK_RAMs_Systems" FromRole="Systems" ToRole="RAMs" />
+          <NavigationProperty Name="SoundCards" Relationship="Self.FK_SoundCards_Systems" FromRole="Systems" ToRole="SoundCards" />
+        </EntityType>
+        <Association Name="FK_CdROMs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="CdROMs" Type="Self.CdROMs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="CdROMs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CPUs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="CPUs" Type="Self.CPUs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="CPUs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GPUs_GPUs">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="GPUs" Type="Self.GPUs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="GPUs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NetworkAdapters_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="NetworkAdapters" Type="Self.NetworkAdapters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="NetworkAdapters">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpratingSystems_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="OpratingSystems" Type="Self.OpratingSystems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="OpratingSystems">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Printers_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="Printers" Type="Self.Printers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="Printers">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAMs_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="RAMs" Type="Self.RAMs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="RAMs">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SoundCards_Systems">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="1" />
+          <End Role="SoundCards" Type="Self.SoundCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="SoundCards">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalNetworkHardwareManagement_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CdROMs" EntityType="Self.CdROMs" />
+          <EntitySet Name="CPUs" EntityType="Self.CPUs" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" />
+          <EntitySet Name="GPUs" EntityType="Self.GPUs" />
+          <EntitySet Name="NetworkAdapters" EntityType="Self.NetworkAdapters" />
+          <EntitySet Name="OpratingSystems" EntityType="Self.OpratingSystems" />
+          <EntitySet Name="Printers" EntityType="Self.Printers" />
+          <EntitySet Name="RAMs" EntityType="Self.RAMs" />
+          <EntitySet Name="SoundCards" EntityType="Self.SoundCards" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" />
+          <AssociationSet Name="FK_CdROMs_Systems" Association="Self.FK_CdROMs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="CdROMs" EntitySet="CdROMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CPUs_Systems" Association="Self.FK_CPUs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="CPUs" EntitySet="CPUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Systems" Association="Self.FK_Drivers_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GPUs_GPUs" Association="Self.FK_GPUs_GPUs">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="GPUs" EntitySet="GPUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NetworkAdapters_Systems" Association="Self.FK_NetworkAdapters_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="NetworkAdapters" EntitySet="NetworkAdapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpratingSystems_Systems" Association="Self.FK_OpratingSystems_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="OpratingSystems" EntitySet="OpratingSystems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Printers_Systems" Association="Self.FK_Printers_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="Printers" EntitySet="Printers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAMs_Systems" Association="Self.FK_RAMs_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="RAMs" EntitySet="RAMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SoundCards_Systems" Association="Self.FK_SoundCards_Systems">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="SoundCards" EntitySet="SoundCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocalNetworkHardwareManagement_DBModelStoreContainer" CdmEntityContainer="LocalNetworkHardwareManagement_DBEntities">
+          <EntitySetMapping Name="CdROMs">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.CdROMs">
+              <MappingFragment StoreEntitySet="CdROMs">
+                <ScalarProperty Name="CdromId" ColumnName="CdromId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPUs">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.CPUs">
+              <MappingFragment StoreEntitySet="CPUs">
+                <ScalarProperty Name="CpuId" ColumnName="CpuId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Cores" ColumnName="Cores" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="DiskName" ColumnName="DiskName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="AvailableSpace" ColumnName="AvailableSpace" />
+                <ScalarProperty Name="TotalSpace" ColumnName="TotalSpace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPUs">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.GPUs">
+              <MappingFragment StoreEntitySet="GPUs">
+                <ScalarProperty Name="GpuId" ColumnName="GpuId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdapterRAM" ColumnName="AdapterRAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NetworkAdapters">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.NetworkAdapters">
+              <MappingFragment StoreEntitySet="NetworkAdapters">
+                <ScalarProperty Name="AdapterId" ColumnName="AdapterId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpratingSystems">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.OpratingSystems">
+              <MappingFragment StoreEntitySet="OpratingSystems">
+                <ScalarProperty Name="OsId" ColumnName="OsId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Architecture" ColumnName="Architecture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Printers">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.Printers">
+              <MappingFragment StoreEntitySet="Printers">
+                <ScalarProperty Name="PrinterId" ColumnName="PrinterId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+                <ScalarProperty Name="IsNetwork" ColumnName="IsNetwork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RAMs">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.RAMs">
+              <MappingFragment StoreEntitySet="RAMs">
+                <ScalarProperty Name="RamId" ColumnName="RamId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Memory" ColumnName="Memory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoundCards">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.SoundCards">
+              <MappingFragment StoreEntitySet="SoundCards">
+                <ScalarProperty Name="SoundCardId" ColumnName="SoundCardId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Systems">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.Systems">
+              <MappingFragment StoreEntitySet="Systems">
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="UniqMotherBoardId" ColumnName="UniqMotherBoardId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
