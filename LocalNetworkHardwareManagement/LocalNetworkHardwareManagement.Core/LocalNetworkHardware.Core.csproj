@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buisness\ManageSystemInformations.cs" />
+    <Compile Include="Helpers\HardwareInformationHelper.cs" />
     <Compile Include="Helpers\ProgramStartupHelper.cs" />
+    <Compile Include="Models\GlobalSystemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalNetworkHardware.DataLayer\LocalNetworkHardware.DataLayer.csproj">
+      <Project>{4db78402-ddf2-4cb3-bf93-de576af22a0a}</Project>
+      <Name>LocalNetworkHardware.DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

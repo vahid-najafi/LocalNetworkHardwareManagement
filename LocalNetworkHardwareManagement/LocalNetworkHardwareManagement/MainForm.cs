@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LocalNetworkHardware.DataLayer.Context;
+using LocalNetworkHardwareManagement.Core.Buisness;
 using LocalNetworkHardwareManagement.Core.Helpers;
 
 namespace LocalNetworkHardwareManagement
@@ -125,9 +127,15 @@ namespace LocalNetworkHardwareManagement
 
         #region Form Load
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
+
+            using (UnitOfWork uof = new UnitOfWork())
+            {
+                ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
+                ActivitiesText.AppendText("SystemId is " + (await manageSystem.CheckThisSystem()).ToString());
+            }
         }
 
         #endregion

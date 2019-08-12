@@ -11,13 +11,18 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
     {
         public static void CheckApplicationStartupRegistry(string appExecutingPath)
         {
-            RegistryKey rkApp = Registry.CurrentUser
-                .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", false);
-
-            if (rkApp.GetValue("Local Network Hardware Management") == null)
+            try
             {
-                rkApp.SetValue("Local Network Hardware Management", appExecutingPath);
+                RegistryKey rkApp = Registry.CurrentUser
+                    .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", false);
+
+                if (rkApp.GetValue("Local Network Hardware Management") == null)
+                {
+                    rkApp.SetValue("Local Network Hardware Management", appExecutingPath);
+                }
             }
+            catch { }
         }
+
     }
 }

@@ -14,6 +14,9 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
             
         }
 
-
+        public bool IsThisSystemExists()
+        {
+            return _db.Systems.Any(s => s.IsOwned);
+        }
     }
 }
