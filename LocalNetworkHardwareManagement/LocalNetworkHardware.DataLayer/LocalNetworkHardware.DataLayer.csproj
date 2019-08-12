@@ -68,6 +68,7 @@
     <Compile Include="CdROMs.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\UnitOfWork.cs" />
     <Compile Include="CPUs.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -106,7 +107,9 @@
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Classes\GenericRepository.cs" />
+    <Compile Include="Services\Classes\SystemsRepository.cs" />
     <Compile Include="Services\IGenericRepository.cs" />
+    <Compile Include="Services\ISystemsRepository.cs" />
     <Compile Include="SoundCards.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -159,8 +162,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
