@@ -27,7 +27,16 @@ namespace LocalNetworkHardware.DataLayer.Context
         }
 
 
-
+        private ICpuRepository _cpuRepository;
+        public ICpuRepository CpuRepository
+        {
+            get
+            {
+                if (_cpuRepository == null)
+                    _cpuRepository = new CpuRepository(db);
+                return _cpuRepository;
+            }
+        }
 
         public void Save()
         {

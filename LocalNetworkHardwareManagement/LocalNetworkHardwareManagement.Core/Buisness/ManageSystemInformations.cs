@@ -23,6 +23,9 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
         public async Task<int> CheckThisSystem()
         {
             GlobalSystemModel systemModel = await HardwareInformationHelper.GetAll();
+            int systemId = 0;
+            string finalMessage = "";
+
 
             return await Task.Run(() =>
             {
@@ -37,6 +40,8 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                     _uof.Save();
                 }
 
+                //Check if cpu with this systemId exists
+                //if it exists check the different and update
 
                 return systemModel.System.SystemId;
             });

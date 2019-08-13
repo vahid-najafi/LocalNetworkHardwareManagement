@@ -106,8 +106,10 @@
     <Compile Include="RAMs.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Classes\CpuRepository.cs" />
     <Compile Include="Services\Classes\GenericRepository.cs" />
     <Compile Include="Services\Classes\SystemsRepository.cs" />
+    <Compile Include="Services\ICpuRepository.cs" />
     <Compile Include="Services\IGenericRepository.cs" />
     <Compile Include="Services\ISystemsRepository.cs" />
     <Compile Include="SoundCards.cs">
