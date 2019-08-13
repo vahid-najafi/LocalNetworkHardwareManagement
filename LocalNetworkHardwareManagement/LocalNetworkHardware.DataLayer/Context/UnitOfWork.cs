@@ -13,6 +13,8 @@ namespace LocalNetworkHardware.DataLayer.Context
         LocalNetworkHardwareManagement_DBEntities db =
             new LocalNetworkHardwareManagement_DBEntities();
 
+
+
         private ISystemsRepository _systemsRepository;
         public ISystemsRepository SystemsRepository
         {
@@ -27,6 +29,8 @@ namespace LocalNetworkHardware.DataLayer.Context
         }
 
 
+
+
         private ICpuRepository _cpuRepository;
         public ICpuRepository CpuRepository
         {
@@ -37,6 +41,117 @@ namespace LocalNetworkHardware.DataLayer.Context
                 return _cpuRepository;
             }
         }
+
+
+
+
+        private ICdromRepository _cdromRepository;
+        public ICdromRepository CdromRepository
+        {
+            get
+            {
+                if (_cdromRepository == null)
+                    _cdromRepository = new CdromRepository(db);
+                return _cdromRepository;
+            }
+        }
+
+
+
+
+        private IDriverRepository _driverRepository;
+        public IDriverRepository DriverRepository
+        {
+            get
+            {
+                if (_driverRepository == null)
+                    _driverRepository = new DriverRepository(db);
+                return _driverRepository;
+            }
+        }
+
+
+
+
+        private IGpuRepository _gpuRepository;
+        public IGpuRepository GpuRepository
+        {
+            get
+            {
+                if (_gpuRepository == null)
+                    _gpuRepository = new GpuRepository(db);
+                return _gpuRepository;
+            }
+        }
+
+
+
+        private INetworkAdaptersRepository _networkAdaptersRepository;
+        public INetworkAdaptersRepository NetworkAdaptersRepository
+        {
+            get
+            {
+                if (_networkAdaptersRepository == null)
+                    _networkAdaptersRepository = new NetworkAdaptersRepository(db);
+                return _networkAdaptersRepository;
+            }
+        }
+
+
+
+
+        private IOprativeSystemRepository _oprativeSystemRepository;
+        public IOprativeSystemRepository OprativeSystemRepository
+        {
+            get
+            {
+                if (_oprativeSystemRepository == null)
+                    _oprativeSystemRepository = new OprativeSystemRepository(db);
+                return _oprativeSystemRepository;
+            }
+        }
+
+
+
+        private IPrinterRepository _printerRepository;
+        public IPrinterRepository PrinterRepository
+        {
+            get
+            {
+                if (_printerRepository == null)
+                    _printerRepository = new PrinterRepository(db);
+                return _printerRepository;
+            }
+        }
+
+
+
+
+        private IRamRepository _ramRepository;
+        public IRamRepository RamRepository
+        {
+            get
+            {
+                if (_ramRepository == null)
+                    _ramRepository = new RamRepository(db);
+                return _ramRepository;
+            }
+        }
+
+
+
+        private ISoundCardRepository _soundCardRepository;
+        public ISoundCardRepository SoundCardRepository
+        {
+            get
+            {
+                if (_soundCardRepository == null)
+                    _soundCardRepository = new SoundCardRepository(db);
+                return _soundCardRepository;
+            }
+        }
+
+
 
         public void Save()
         {
