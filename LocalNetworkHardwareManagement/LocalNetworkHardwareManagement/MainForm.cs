@@ -136,6 +136,9 @@ namespace LocalNetworkHardwareManagement
                 ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
                 ActivitiesText.AppendText("SystemId is " + (await manageSystem.CheckThisSystem()).ToString());
             }
+
+            DatabaseTest newForm = new DatabaseTest();
+            newForm.Show();
         }
 
         #endregion
