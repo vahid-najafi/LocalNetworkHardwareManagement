@@ -8,6 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface ISystemsRepository: IGenericRepository<Systems>
     {
-        bool IsThisSystemExists();
+        bool IsThisSystemExists(out Systems system);
     }
 }

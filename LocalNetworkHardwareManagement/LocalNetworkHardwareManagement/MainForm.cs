@@ -137,6 +137,7 @@ namespace LocalNetworkHardwareManagement
                 ActivitiesText.AppendText("SystemId is " + (await manageSystem.CheckThisSystem()).ToString());
             }
 
+            //Helper
             DatabaseTest newForm = new DatabaseTest();
             newForm.Show();
         }

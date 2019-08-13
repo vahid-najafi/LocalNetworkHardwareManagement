@@ -29,10 +29,14 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
             return await Task.Run(() =>
             {
-                if (_uof.SystemsRepository.IsThisSystemExists())
+                //TODO: Compelete Model For Update
+                if (_uof.SystemsRepository.IsThisSystemExists(out Systems system))
                 {
+                    systemModel.System.SystemId = system.SystemId;
+                    //TODO: Check The Difference
                     _uof.SystemsRepository.Update(systemModel.System);
                     _uof.Save();
+                    finalMessage += "اطلاعات سیستم بروزرسانی شد\n";
                 }
                 else
                 {
@@ -40,8 +44,21 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                     _uof.Save();
                 }
 
+                systemId = systemModel.System.SystemId;
+
                 //Check if cpu with this systemId exists
-                //if it exists check the different and update
+                if (_uof.CpuRepository.IsSystemCpuExists(systemId))
+                {
+                    //if it exists check the different and update
+                    //TODO: Check Difference
+                    _uof.CpuRepository.Update(systemModel.CPU);
+                    _uof.Save();
+                }
+                else
+                {
+                    _uof.CpuRepository.Insert(systemModel.CPU);
+                }
+                
 
                 return systemModel.System.SystemId;
             });
