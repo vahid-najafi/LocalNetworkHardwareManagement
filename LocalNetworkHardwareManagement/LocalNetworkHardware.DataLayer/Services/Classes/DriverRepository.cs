@@ -12,5 +12,12 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public bool IsDriverExists(int systemId, string driverAddress, out Drivers driver)
+        {
+            driver = _db.Drivers.AsNoTracking()
+                .FirstOrDefault(d => d.SystemId == systemId && d.Address == driverAddress);
+            return (driver != null);
+        }
     }
 }

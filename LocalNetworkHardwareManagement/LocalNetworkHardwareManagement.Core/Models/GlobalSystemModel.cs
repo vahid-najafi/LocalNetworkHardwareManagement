@@ -13,13 +13,15 @@ namespace LocalNetworkHardwareManagement.Core.Models
 
         public CPUs CPU { get; set; }
 
+        public RAMs RAM { get; set; }
+
         public IEnumerable<GPUs> GPUs { get; set; }
 
         public IEnumerable<Drivers> Drivers { get; set; }
 
         public IEnumerable<NetworkAdapters> NetworkAdapters { get; set; }
 
-        public IEnumerable<OperatingSystem> OperatingSystems { get; set; }
+        public IEnumerable<OpratingSystems> OperatingSystems { get; set; }
 
         public IEnumerable<SoundCards> SoundCards { get; set; }
 

@@ -8,5 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface IDriverRepository: IGenericRepository<Drivers>
     {
+        bool IsDriverExists(int systemId, string driverAddress, out Drivers driver);
     }
 }

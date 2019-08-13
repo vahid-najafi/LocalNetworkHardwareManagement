@@ -111,6 +111,8 @@
             // 
             // ActivitiesText
             // 
+            this.ActivitiesText.Font = new System.Drawing.Font("B Mitra", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.ActivitiesText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ActivitiesText.Location = new System.Drawing.Point(195, 117);
             this.ActivitiesText.Multiline = true;
             this.ActivitiesText.Name = "ActivitiesText";
