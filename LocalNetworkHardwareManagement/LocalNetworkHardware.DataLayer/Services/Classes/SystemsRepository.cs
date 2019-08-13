@@ -16,10 +16,9 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
 
         public bool IsThisSystemExists(out Systems system)
         {
-            Systems thisSystem = _db.Systems.FirstOrDefault(s => s.IsOwned);
-            system = thisSystem;
+            system = _db.Systems.AsNoTracking().FirstOrDefault(s => s.IsOwned);
 
-            return (thisSystem != null);
+            return (system != null);
         }
     }
 }

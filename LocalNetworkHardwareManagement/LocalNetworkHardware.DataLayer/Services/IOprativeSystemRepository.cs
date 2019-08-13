@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocalNetworkHardware.DataLayer.Services
 {
-    public interface ICpuRepository: IGenericRepository<CPUs>
+    public interface IOprativeSystemRepository: IGenericRepository<OpratingSystems>
     {
-        bool IsSystemCpuExists(int systemId, out CPUs cpu);
-
     }
 }

@@ -14,9 +14,10 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
             
         }
 
-        public bool IsSystemCpuExists(int systemId)
+        public bool IsSystemCpuExists(int systemId, out CPUs cpu)
         {
-            return _db.CPUs.Any(c => c.SystemId == systemId);
+            cpu = _db.CPUs.AsNoTracking().FirstOrDefault(c => c.SystemId == systemId);
+            return (cpu != null);
         }
     }
 }

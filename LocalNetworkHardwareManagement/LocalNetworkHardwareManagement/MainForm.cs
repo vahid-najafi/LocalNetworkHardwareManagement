@@ -134,7 +134,7 @@ namespace LocalNetworkHardwareManagement
             using (UnitOfWork uof = new UnitOfWork())
             {
                 ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
-                ActivitiesText.AppendText("SystemId is " + (await manageSystem.CheckThisSystem()).ToString());
+                ActivitiesText.AppendText(await manageSystem.CheckThisSystem());
             }
 
             //Helper
