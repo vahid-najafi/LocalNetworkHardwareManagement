@@ -134,11 +134,11 @@ namespace LocalNetworkHardwareManagement
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
 
             //Just for test
-            using (UnitOfWork uof = new UnitOfWork())
-            {
-                DatabaseDummyTest test = new DatabaseDummyTest(uof);
-                await test.InsertTestRecords();
-            }
+            //using (UnitOfWork uof = new UnitOfWork())
+            //{
+            //    DatabaseDummyTest test = new DatabaseDummyTest(uof);
+            //    await test.InsertTestRecords();
+            //}
 
             //checking global system information in startup
             using (UnitOfWork uof = new UnitOfWork())
@@ -147,6 +147,11 @@ namespace LocalNetworkHardwareManagement
                 ActivitiesText.Text = (await manageSystem.UpdateOwnedSystem())
                     .Replace("<newLine>", Environment.NewLine) + Environment.NewLine + ActivitiesText.Text;
             }
+
+            //Getting Connected Nodes
+            IpAddressManagement ipAddressManagement = new IpAddressManagement();
+            string[] ipAdrressResultList = await ipAddressManagement.StartGettingHosts();
+            NodesList.Items.AddRange(ipAdrressResultList);
 
             //Starting server to communicate with other nodes
             Task.Run(() => AsynchronousSocketListener.StartListening());
