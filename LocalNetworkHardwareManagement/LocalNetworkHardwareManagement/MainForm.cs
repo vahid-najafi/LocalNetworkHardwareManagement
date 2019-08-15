@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using LocalNetworkHardware.DataLayer.Context;
 using LocalNetworkHardwareManagement.Core.Buisness;
 using LocalNetworkHardwareManagement.Core.Helpers;
+using LocalNetworkHardwareManagement.Core.Socket_Classes;
 
 namespace LocalNetworkHardwareManagement
 {
@@ -131,6 +132,9 @@ namespace LocalNetworkHardwareManagement
         {
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
 
+
+
+            //checking global system information in startup
             using (UnitOfWork uof = new UnitOfWork())
             {
                 ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
@@ -138,6 +142,10 @@ namespace LocalNetworkHardwareManagement
                     .Replace("<newLine>", Environment.NewLine);
             }
 
+            //Starting server to communicate with other nodes
+            Task.Run(() => AsynchronousSocketListener.StartListening());
+
+            ActivitiesText.Text += "سرور استارت شد.\n";
             //Helper
             DatabaseTest newForm = new DatabaseTest();
             newForm.Show();

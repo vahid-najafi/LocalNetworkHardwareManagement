@@ -48,6 +48,10 @@
     <Compile Include="Helpers\ProgramStartupHelper.cs" />
     <Compile Include="Models\GlobalSystemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Socket Classes\AsynchronousClient.cs" />
+    <Compile Include="Socket Classes\AsynchronousSocketListener.cs" />
+    <Compile Include="Socket Classes\RequestManager.cs" />
+    <Compile Include="Socket Classes\StateObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalNetworkHardware.DataLayer\LocalNetworkHardware.DataLayer.csproj">

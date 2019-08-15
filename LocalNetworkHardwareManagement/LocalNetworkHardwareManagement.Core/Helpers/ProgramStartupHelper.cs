@@ -16,9 +16,9 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
                 RegistryKey rkApp = Registry.CurrentUser
                     .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", false);
 
-                if (rkApp.GetValue("Local Network Hardware Management") == null)
+                if (rkApp.GetValue("LNHM") == null)
                 {
-                    rkApp.SetValue("Local Network Hardware Management", appExecutingPath);
+                    rkApp.SetValue("LNHM", appExecutingPath);
                 }
             }
             catch { }
