@@ -52,6 +52,7 @@
     <Compile Include="Socket Classes\AsynchronousSocketListener.cs" />
     <Compile Include="Socket Classes\RequestManager.cs" />
     <Compile Include="Socket Classes\StateObject.cs" />
+    <Compile Include="Test\DatabaseDummyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalNetworkHardware.DataLayer\LocalNetworkHardware.DataLayer.csproj">

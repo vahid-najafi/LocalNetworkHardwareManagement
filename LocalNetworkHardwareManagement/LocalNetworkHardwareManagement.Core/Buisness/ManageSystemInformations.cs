@@ -140,6 +140,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 {
                     model.CpuId = cpu.CpuId;
                     _uof.CpuRepository.Update(model);
+                    finalMessage += resultMessage;
                     finalMessage += "اطلاعات پردازنده بروزرسانی شد.<newLine>";
                 }
             }

@@ -11,6 +11,7 @@ using LocalNetworkHardware.DataLayer.Context;
 using LocalNetworkHardwareManagement.Core.Buisness;
 using LocalNetworkHardwareManagement.Core.Helpers;
 using LocalNetworkHardwareManagement.Core.Socket_Classes;
+using LocalNetworkHardwareManagement.Core.Test;
 
 namespace LocalNetworkHardwareManagement
 {
@@ -132,20 +133,26 @@ namespace LocalNetworkHardwareManagement
         {
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
 
-
+            //Just for test
+            using (UnitOfWork uof = new UnitOfWork())
+            {
+                DatabaseDummyTest test = new DatabaseDummyTest(uof);
+                await test.InsertTestRecords();
+            }
 
             //checking global system information in startup
             using (UnitOfWork uof = new UnitOfWork())
             {
                 ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
-                ActivitiesText.Text += (await manageSystem.UpdateOwnedSystem())
-                    .Replace("<newLine>", Environment.NewLine);
+                ActivitiesText.Text = (await manageSystem.UpdateOwnedSystem())
+                    .Replace("<newLine>", Environment.NewLine) + Environment.NewLine + ActivitiesText.Text;
             }
 
             //Starting server to communicate with other nodes
             Task.Run(() => AsynchronousSocketListener.StartListening());
 
-            ActivitiesText.Text += "سرور استارت شد.\n";
+            ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
+
             //Helper
             DatabaseTest newForm = new DatabaseTest();
             newForm.Show();
