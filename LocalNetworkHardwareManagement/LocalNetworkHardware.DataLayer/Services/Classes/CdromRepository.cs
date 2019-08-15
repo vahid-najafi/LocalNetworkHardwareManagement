@@ -14,5 +14,10 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public IEnumerable<CdROMs> GetAllSystemCdRoms(int systemId)
+        {
+            return _db.CdROMs.Where(c => c.SystemId == systemId).ToList();
+        }
     }
 }

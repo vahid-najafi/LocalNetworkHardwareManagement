@@ -8,5 +8,8 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface IOprativeSystemRepository: IGenericRepository<OpratingSystems>
     {
+        bool IsOperatingSystemExists(OpratingSystems os, out OpratingSystems existingOS);
+
+        IEnumerable<OpratingSystems> GetAllSystemOs(int systemId);
     }
 }

@@ -13,5 +13,11 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public IEnumerable<GPUs> GetSystemExistingGPUs(int systemId)
+        {
+            return _db.GPUs.Where(g => g.SystemId == systemId).ToList();
+        }
+
     }
 }

@@ -8,5 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface IRamRepository: IGenericRepository<RAMs>
     {
+        bool IsRamExists(int systemId, out RAMs existingRAM);
     }
 }

@@ -8,5 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface ICdromRepository: IGenericRepository<CdROMs>
     {
+        IEnumerable<CdROMs> GetAllSystemCdRoms(int systemId);
     }
 }

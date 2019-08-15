@@ -134,7 +134,8 @@ namespace LocalNetworkHardwareManagement
             using (UnitOfWork uof = new UnitOfWork())
             {
                 ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
-                ActivitiesText.Text += (await manageSystem.CheckThisSystem()).Replace("<newLine>", Environment.NewLine);
+                ActivitiesText.Text += (await manageSystem.UpdateOwnedSystem())
+                    .Replace("<newLine>", Environment.NewLine);
             }
 
             //Helper

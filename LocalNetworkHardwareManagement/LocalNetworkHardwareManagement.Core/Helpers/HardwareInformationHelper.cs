@@ -13,7 +13,9 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
     public static class HardwareInformationHelper
     {
 
-        public static async Task<GlobalSystemModel> GetAll()
+        #region Get Hardware Informations
+
+        public static async Task<GlobalSystemModel> GetGlobalSystemModel()
         {
             return await Task.Run(() => new GlobalSystemModel()
             {
@@ -89,7 +91,7 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
                     if (drive.DriveType == DriveType.CDRom)
                         name = "CD-ROM Drive";
 
-                    result .Add(new Drivers()
+                    result.Add(new Drivers()
                     {
                         Address = drive.Name.ToUpper().Trim(),
                         AvailableSpace = drive.TotalFreeSpace,
@@ -245,7 +247,6 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
             });
         }
 
-
         public static string GetMotherBoardID()
         {
             string mbInfo = String.Empty;
@@ -262,5 +263,85 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
             return mbInfo;
         }
+
+        #endregion
+
+        #region Check For Changes
+
+        public static bool  CheckGlobalSystemChanges(Systems oldSystem, Systems newSystem, out string resultMessage)
+        {
+            resultMessage = "";
+            bool change = false;
+
+            //Check If Name Has Changed
+            if (oldSystem.Name != newSystem.Name)
+            {
+                resultMessage += "نام سیستم تغییر کرده است.<newLine>";
+                change = true;
+            }
+
+            //Check If Motherboard Has Changed
+            if (oldSystem.UniqMotherBoardId != newSystem.UniqMotherBoardId)
+            {
+                resultMessage += "تغییر مادربورد سیستم شناسایی شد.<newLine>";
+                change = true;
+            }
+                
+
+            return change;
+        }
+
+        public static bool CheckSystemCpuChanges(CPUs oldCpu, CPUs newCpu, out string resultMessage)
+        {
+            resultMessage = "";
+            bool change = false;
+
+            //Check if cpu is changed
+            if (oldCpu.Name != newCpu.Name)
+            {
+                resultMessage += "پردازنده سیستم تغییر کرده است.<newLine>";
+                change = true;
+            }
+
+            //Check if there is any changes in cpu cores
+            if (oldCpu.Cores != newCpu.Cores)
+            {
+                resultMessage += "تغییر در تعداد هسته های پردازنده شناسایی شد.<newLine>";
+                change = true;
+            }
+
+            return change;
+        }
+
+        public static bool CheckDriverChanges(Drivers oldDriver, Drivers newDriver, out string resultMessage)
+        {
+            resultMessage = "";
+            bool changes = false;
+
+            //Check driver volume label
+            if (oldDriver.DiskName != newDriver.DiskName)
+            {
+                resultMessage += $"نام درایو {oldDriver.Address} تغییر کرده است.<newLine>";
+                changes = true;
+            }
+
+            //Check driver total space
+            if (oldDriver.TotalSpace != newDriver.TotalSpace)
+            {
+                resultMessage += $"فضای کلی درایو {newDriver.Address} تغییر کرده است. <newLine>";
+                changes = true;
+            }
+
+            //Check driver available space
+            if (oldDriver.AvailableSpace != newDriver.AvailableSpace)
+            {
+                resultMessage += $"فضای آزاد درایو {oldDriver.Address} تغییر کرده است.<newLine>";
+                changes = true;
+            }
+
+            return changes;
+        }
+
+        #endregion
     }
 }

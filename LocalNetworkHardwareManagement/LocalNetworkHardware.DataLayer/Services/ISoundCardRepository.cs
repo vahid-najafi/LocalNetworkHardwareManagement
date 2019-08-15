@@ -8,5 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface ISoundCardRepository: IGenericRepository<SoundCards>
     {
+        IEnumerable<SoundCards> GettAllSystemSoundCards(int systemId);
     }
 }

@@ -117,6 +117,7 @@
             this.ActivitiesText.Multiline = true;
             this.ActivitiesText.Name = "ActivitiesText";
             this.ActivitiesText.ReadOnly = true;
+            this.ActivitiesText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ActivitiesText.Size = new System.Drawing.Size(573, 284);
             this.ActivitiesText.TabIndex = 5;
             // 

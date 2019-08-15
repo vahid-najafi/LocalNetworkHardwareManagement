@@ -13,5 +13,10 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public IEnumerable<SoundCards> GettAllSystemSoundCards(int systemId)
+        {
+            return _db.SoundCards.Where(s => s.SystemId == systemId).ToList();
+        }
     }
 }

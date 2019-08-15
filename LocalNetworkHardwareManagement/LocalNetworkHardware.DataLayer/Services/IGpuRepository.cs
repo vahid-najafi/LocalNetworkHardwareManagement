@@ -8,5 +8,6 @@ namespace LocalNetworkHardware.DataLayer.Services
 {
     public interface IGpuRepository: IGenericRepository<GPUs>
     {
+        IEnumerable<GPUs> GetSystemExistingGPUs(int systemId);
     }
 }

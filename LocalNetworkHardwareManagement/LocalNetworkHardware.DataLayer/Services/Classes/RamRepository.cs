@@ -14,5 +14,13 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public bool IsRamExists(int systemId, out RAMs existingRAM)
+        {
+            existingRAM = _db.RAMs.AsNoTracking()
+                .FirstOrDefault(r => r.SystemId == systemId);
+
+            return (existingRAM != null);
+        }
     }
 }
