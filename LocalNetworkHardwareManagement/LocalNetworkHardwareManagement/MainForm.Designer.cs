@@ -42,8 +42,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.LocalIPsCombo = new System.Windows.Forms.ComboBox();
+            this.ServerStartButton = new System.Windows.Forms.Button();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.SuspendLayout();
@@ -145,7 +145,7 @@
             this.NodesList.ItemHeight = 20;
             this.NodesList.Location = new System.Drawing.Point(12, 237);
             this.NodesList.Name = "NodesList";
-            this.NodesList.Size = new System.Drawing.Size(273, 164);
+            this.NodesList.Size = new System.Drawing.Size(262, 164);
             this.NodesList.TabIndex = 7;
             // 
             // label2
@@ -153,7 +153,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(167, 204);
+            this.label2.Location = new System.Drawing.Point(161, 204);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(118, 30);
             this.label2.TabIndex = 8;
@@ -221,34 +221,35 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(106, 84);
+            this.label3.Location = new System.Drawing.Point(97, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(179, 30);
             this.label3.TabIndex = 13;
             this.label3.Text = "آیپی خود را انتخاب کنید:";
             // 
-            // comboBox1
+            // LocalIPsCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(14, 117);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBox1.Size = new System.Drawing.Size(266, 28);
-            this.comboBox1.TabIndex = 14;
+            this.LocalIPsCombo.FormattingEnabled = true;
+            this.LocalIPsCombo.Location = new System.Drawing.Point(14, 117);
+            this.LocalIPsCombo.Name = "LocalIPsCombo";
+            this.LocalIPsCombo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.LocalIPsCombo.Size = new System.Drawing.Size(260, 28);
+            this.LocalIPsCombo.TabIndex = 14;
             // 
-            // button2
+            // ServerStartButton
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(14, 151);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(266, 37);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "استارت سرور";
-            this.button2.UseVisualStyleBackColor = false;
+            this.ServerStartButton.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ServerStartButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ServerStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ServerStartButton.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.ServerStartButton.ForeColor = System.Drawing.Color.White;
+            this.ServerStartButton.Location = new System.Drawing.Point(14, 151);
+            this.ServerStartButton.Name = "ServerStartButton";
+            this.ServerStartButton.Size = new System.Drawing.Size(260, 40);
+            this.ServerStartButton.TabIndex = 15;
+            this.ServerStartButton.Text = "استارت سرور";
+            this.ServerStartButton.UseVisualStyleBackColor = false;
+            this.ServerStartButton.Click += new System.EventHandler(this.ServerStartButton_Click);
             // 
             // MainForm
             // 
@@ -257,8 +258,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(780, 480);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ServerStartButton);
+            this.Controls.Add(this.LocalIPsCombo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -300,7 +301,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox LocalIPsCombo;
+        private System.Windows.Forms.Button ServerStartButton;
     }
 }

@@ -16,13 +16,13 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
         {
         }
 
-        public static void StartListening()
+        public static void StartListening(string myIP = "127.0.0.1")
         {
             // Establish the local endpoint for the socket.  
             // The DNS name of the computer  
             // running the listener is "host.contoso.com".  
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            IPAddress ipAddress = IPAddress.Parse(myIP);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 8081);
 
             // Create a TCP/IP socket.  

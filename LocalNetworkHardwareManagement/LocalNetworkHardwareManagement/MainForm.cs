@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -149,22 +151,65 @@ namespace LocalNetworkHardwareManagement
             }
 
             //Getting Connected Nodes
-            IpAddressManagement ipAddressManagement = new IpAddressManagement();
-            string[] ipAdrressResultList = await ipAddressManagement.StartGettingHosts();
-            NodesList.Items.AddRange(ipAdrressResultList);
+            LoadLocalIPs();
 
             //Starting server to communicate with other nodes
-            Task.Run(() => AsynchronousSocketListener.StartListening());
-
-            ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.LocalNetworkIP))
+            {
+                ServerStartButton_Click(ServerStartButton, EventArgs.Empty);
+            }
 
             //Helper
             //DatabaseTest newForm = new DatabaseTest();
             //newForm.Show();
         }
 
+        private void LoadLocalIPs()
+        {
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.LocalNetworkIP))
+            {
+                LocalIPsCombo.Items.Add(Properties.Settings.Default.LocalNetworkIP);
+            }
+            var localIps = IpAddressManagement.GetLocalIPv4Addresses().ToArray();
+            LocalIPsCombo.Items.AddRange(localIps);
+            LocalIPsCombo.SelectedIndex = 0;
+        }
+
+
         #endregion
 
+        //TODO: Show Errors
+        private async void ServerStartButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (IPAddress.TryParse(LocalIPsCombo.Text, out IPAddress ip))
+                {
+                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        //Saving Default IP Address
+                        Properties.Settings.Default.LocalNetworkIP = LocalIPsCombo.Text;
+                        Properties.Settings.Default.Save();
 
+                        //Starting Server
+                        Task.Run(() => AsynchronousSocketListener.StartListening());
+                        ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
+
+                        //Getting Connected Nodes
+                        IpAddressManagement ipManagement = new IpAddressManagement();
+                        NodesList.Items.AddRange(await ipManagement.StartGettingHosts(ip.ToString()));
+                        
+                    }
+                }
+                else
+                {
+                    ActivitiesText.Text = "آیپی وارد شده اشتباه می باشد." + Environment.NewLine + ActivitiesText.Text;
+                }
+            }
+            catch (Exception exception)
+            {
+                ActivitiesText.Text = "متاسفانه عملیات با شکست مواجه شد." + Environment.NewLine + ActivitiesText.Text;
+            }
+        }
     }
 }

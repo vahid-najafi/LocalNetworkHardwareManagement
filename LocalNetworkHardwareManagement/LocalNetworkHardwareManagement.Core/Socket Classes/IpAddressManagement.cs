@@ -12,23 +12,22 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
     public class IpAddressManagement
     {
         private static List<string> _hostIpList;
-        private static IEnumerable<string> _myIpList;
+        private static string _myIP;
         public IpAddressManagement()
         {
             _hostIpList = new List<string>();
-            _myIpList = GetLocalIPv4Addresses();
+            _myIP = "";
         }
 
-        public async Task<string[]> StartGettingHosts()
+        public async Task<string[]> StartGettingHosts(string ipAddress)
         {
             return await Task.Run(() =>
             {
-                foreach (string ipAddress in _myIpList)
-                {
-                    string baseIp = GetBaseIp(ipAddress);
-                    if (baseIp.ToLower().Equals("error")) continue;
-                    GetHosts(baseIp);
-                }
+                _myIP = ipAddress;
+                string baseIp = GetBaseIp(ipAddress);
+                //if (baseIp.ToLower().Equals("error")) continue;
+                GetHosts(baseIp);
+
 
                 return _hostIpList.ToArray();
             });
@@ -73,7 +72,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             string ip = (string)e.UserState;
             if (e.Reply != null && e.Reply.Status == IPStatus.Success)
             {
-                if (_myIpList.All(i => i != ip))
+                if (_myIP != ip)
                     _hostIpList.Add(ip);
             }
         }
