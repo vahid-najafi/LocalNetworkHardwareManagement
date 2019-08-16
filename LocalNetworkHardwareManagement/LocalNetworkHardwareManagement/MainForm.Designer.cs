@@ -41,6 +41,9 @@
             this.FullExitButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.SuspendLayout();
@@ -113,25 +116,25 @@
             // 
             this.ActivitiesText.Font = new System.Drawing.Font("B Mitra", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.ActivitiesText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ActivitiesText.Location = new System.Drawing.Point(195, 117);
+            this.ActivitiesText.Location = new System.Drawing.Point(291, 117);
             this.ActivitiesText.Multiline = true;
             this.ActivitiesText.Name = "ActivitiesText";
             this.ActivitiesText.ReadOnly = true;
             this.ActivitiesText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ActivitiesText.Size = new System.Drawing.Size(573, 284);
+            this.ActivitiesText.Size = new System.Drawing.Size(477, 284);
             this.ActivitiesText.TabIndex = 5;
             // 
             // ClearButton
             // 
             this.ClearButton.BackColor = System.Drawing.Color.SeaShell;
             this.ClearButton.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.eraser__1_;
-            this.ClearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ClearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClearButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ClearButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.ClearButton.Location = new System.Drawing.Point(195, 74);
+            this.ClearButton.Location = new System.Drawing.Point(291, 84);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(40, 40);
+            this.ClearButton.Size = new System.Drawing.Size(30, 27);
             this.ClearButton.TabIndex = 6;
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
@@ -140,9 +143,9 @@
             // 
             this.NodesList.FormattingEnabled = true;
             this.NodesList.ItemHeight = 20;
-            this.NodesList.Location = new System.Drawing.Point(12, 117);
+            this.NodesList.Location = new System.Drawing.Point(12, 237);
             this.NodesList.Name = "NodesList";
-            this.NodesList.Size = new System.Drawing.Size(163, 284);
+            this.NodesList.Size = new System.Drawing.Size(273, 164);
             this.NodesList.TabIndex = 7;
             // 
             // label2
@@ -150,7 +153,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(62, 84);
+            this.label2.Location = new System.Drawing.Point(167, 204);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(118, 30);
             this.label2.TabIndex = 8;
@@ -213,6 +216,40 @@
             this.button4.Text = "درباره برنامه نویس";
             this.button4.UseVisualStyleBackColor = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(106, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(179, 30);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "آیپی خود را انتخاب کنید:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(14, 117);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBox1.Size = new System.Drawing.Size(266, 28);
+            this.comboBox1.TabIndex = 14;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(14, 151);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(266, 37);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "استارت سرور";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -220,6 +257,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(780, 480);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.FullExitButton);
@@ -259,5 +299,8 @@
         private System.Windows.Forms.Button FullExitButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button2;
     }
 }

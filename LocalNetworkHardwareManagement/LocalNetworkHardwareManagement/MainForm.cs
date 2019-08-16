@@ -159,8 +159,8 @@ namespace LocalNetworkHardwareManagement
             ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
 
             //Helper
-            DatabaseTest newForm = new DatabaseTest();
-            newForm.Show();
+            //DatabaseTest newForm = new DatabaseTest();
+            //newForm.Show();
         }
 
         #endregion
