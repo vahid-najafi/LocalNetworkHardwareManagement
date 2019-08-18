@@ -37,7 +37,6 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             });
         }
 
-
         public string CheckGlobalModel(GlobalSystemModel systemModel, bool isOwned)
         {
             int systemId = 0;
@@ -153,6 +152,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             return finalMessage;
         }
 
+        //TODO: Has One
         public string CheckDrivers(IEnumerable<Drivers> modelList, int systemId)
         {
             string finalMessage = "";

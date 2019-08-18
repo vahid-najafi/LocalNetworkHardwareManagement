@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LocalNetworkHardwareManagement.Core.Buisness;
+using LocalNetworkHardwareManagement.Core.Helpers;
 
 namespace LocalNetworkHardwareManagement.Core.Socket_Classes
 {
@@ -13,7 +15,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             switch (request)
             {
                 case "/get":
-                    return "Should return hardware informations";
+                    return HardwareInformationHelper.GetHardwareInfoToSend();
                 default:
                     return "Invalid Request";
             }

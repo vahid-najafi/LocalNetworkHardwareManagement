@@ -15,6 +15,123 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
         #region Get Hardware Informations
 
+
+        public static string GetHardwareInfoToSend()
+        {
+            GlobalSystemModel systemModel = GetGlobalSystemModel().Result;
+
+            string finalMessage = "";
+
+
+            //Adding global system
+            finalMessage += $"<global><UniqMotherBoardId>{systemModel.System.UniqMotherBoardId}" +
+                            $"<Name>{systemModel.System.Name}</global>";
+
+            //Adding CPU
+            finalMessage += $"<cpu><Name>{systemModel.CPU.Name}<Cores>{systemModel.CPU.Cores}</cpu>";
+
+
+            //Adding GPUs
+            if (systemModel.GPUs.Any())
+            {
+                string gpuMessage = "";
+                foreach (GPUs gpu in systemModel.GPUs)
+                {
+                    gpuMessage += $"<Name>{gpu.Name}<AdapterRAM>{gpu.AdapterRAM}<split>";
+                }
+
+                gpuMessage = gpuMessage.Substring(0, gpuMessage.Length - 7);
+                finalMessage += $"<gpu>{gpuMessage}</gpu>";
+            }
+
+
+
+            //Adding Operating Systems
+            string osMessage = "";
+            foreach (OpratingSystems os in systemModel.OperatingSystems)
+            {
+                osMessage += $"<Name>{os.Name}<Architecture>{os.Architecture}<Version>{os.Version}<split>";
+            }
+
+            osMessage = osMessage.Substring(0, osMessage.Length - 7);
+            finalMessage += $"<operatingSystems>{osMessage}</operatingSystems>";
+
+
+
+            //Adding RAM
+            finalMessage += $"<ram><Memory>{systemModel.RAM.Memory}</ram>";
+
+            //Adding Network Adapters
+            if (systemModel.NetworkAdapters.Any())
+            {
+                string networkAdaptersMessage = "";
+                foreach (NetworkAdapters networkAdapter in systemModel.NetworkAdapters)
+                {
+                    networkAdaptersMessage += $"<Name>{networkAdapter.Name}<split>";
+                }
+
+                networkAdaptersMessage = networkAdaptersMessage
+                    .Substring(0, networkAdaptersMessage.Length - 7);
+                finalMessage += $"<networkAdapters>{networkAdaptersMessage}</networkAdapters>";
+            }
+
+
+            //Adding Drivers
+            string driversMessage = "";
+            foreach (Drivers driver in systemModel.Drivers)
+            {
+                driversMessage += $"<DiskName>{driver.DiskName}<Address>{driver.Address}<Type>{driver.Type}<AvailableSpace>{driver.AvailableSpace}<TotalSpace>{driver.TotalSpace}<split>";
+            }
+
+            driversMessage = driversMessage.Substring(0, driversMessage.Length - 7);
+            finalMessage += $"<drivers>{driversMessage}</drivers>";
+
+
+
+            //Adding Sound Cards
+            if (systemModel.SoundCards.Any())
+            {
+                string soundCardsMessage = "";
+                foreach (SoundCards soundCard in systemModel.SoundCards)
+                {
+                    soundCardsMessage += $"<Name>{soundCard.Name}<split>";
+                }
+
+                soundCardsMessage = soundCardsMessage.Substring(0, soundCardsMessage.Length - 7);
+                finalMessage += $"<soundCards>{soundCardsMessage}</soundCards>";
+            }
+
+            //Adding Printers
+            if (systemModel.Printers.Any())
+            {
+                string printersMessage = "";
+                foreach (Printers printer in systemModel.Printers)
+                {
+                    printersMessage += $"<Name>{printer.Name}<IsLocal>{printer.IsLocal}<IsNetwork>{printer.IsNetwork}<split>";
+                }
+
+                printersMessage = printersMessage.Substring(0, printersMessage.Length - 7);
+                finalMessage += $"<printers>{printersMessage}</printers>";
+            }
+
+
+            //Adding CD-ROMs
+            if (systemModel.CDROMs.Any())
+            {
+                string cdRomsMessage = "";
+                foreach (CdROMs cdROM in systemModel.CDROMs)
+                {
+                    cdRomsMessage += $"<Description>{cdROM.Description}<Address>{cdROM.Address}<MediaType>{cdROM.MediaType}<split>";
+                }
+
+                cdRomsMessage = cdRomsMessage.Substring(0, cdRomsMessage.Length - 7);
+                finalMessage += $"<cdroms>{cdRomsMessage}</cdroms>";
+
+            }
+
+            return finalMessage;
+        }
+
         public static async Task<GlobalSystemModel> GetGlobalSystemModel()
         {
             return await Task.Run(() => new GlobalSystemModel()
@@ -154,7 +271,8 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
         public static async Task<IEnumerable<NetworkAdapters>> GetSystemNetworkIntefaces()
         {
-            return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
                 ManagementObjectSearcher searcher =
                     new ManagementObjectSearcher(@"SELECT * FROM Win32_NetworkAdapter WHERE Manufacturer != 'Microsoft' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
 
@@ -268,7 +386,7 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
         #region Check For Changes
 
-        public static bool  CheckGlobalSystemChanges(Systems oldSystem, Systems newSystem, out string resultMessage)
+        public static bool CheckGlobalSystemChanges(Systems oldSystem, Systems newSystem, out string resultMessage)
         {
             resultMessage = "";
             bool change = false;
@@ -286,7 +404,7 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
                 resultMessage += "تغییر مادربورد سیستم شناسایی شد.<newLine>";
                 change = true;
             }
-                
+
 
             return change;
         }
