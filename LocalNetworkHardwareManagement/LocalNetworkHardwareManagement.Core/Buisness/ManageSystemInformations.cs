@@ -21,6 +21,34 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             _uof = unitOfWork;
         }
 
+        public static GlobalSystemModel GetOtherSystemsInformations(string message)
+        {
+            GlobalSystemModel systemModel = new GlobalSystemModel();
+
+            //get global info
+            systemModel.System = ConvertMessageToSystems(message);
+
+            //get CPU
+            systemModel.CPU = ConvertMessageToCPU(message);
+
+            //get GPUs
+            systemModel.GPUs = ConvertMessageToGPUArray(message);
+
+            systemModel.OperatingSystems = ConvertMessageTOperatingSystemsList(message);
+
+            systemModel.Drivers = ConvertMessageToDriversList(message);
+
+            systemModel.RAM = ConvertMessageToRAM(message);
+
+            systemModel.NetworkAdapters = ConvertMessageToNetworkAdaptersList(message);
+
+            systemModel.SoundCards = ConvertMessageToSoundCardsList(message);
+
+            systemModel.Printers = ConvertMessageToPrintersList(message);
+
+            return systemModel;
+        }
+
         public async Task<string> UpdateOwnedSystem()
         {
             GlobalSystemModel systemModel = await HardwareInformationHelper.GetGlobalSystemModel();
@@ -36,6 +64,10 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 return finalMessage;
             });
         }
+
+
+        //TODO: Has One
+        #region Checks
 
         public string CheckGlobalModel(GlobalSystemModel systemModel, bool isOwned)
         {
@@ -420,5 +452,278 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
             return finalMessage;
         }
+
+        #endregion
+
+        #region Covert Message To Class
+
+        public static Systems ConvertMessageToSystems(string message)
+        {
+            int globalFrom = message.IndexOf("<global>") + "<global>".Length;
+            int globalTo = message.LastIndexOf("</global>");
+            string globalInfo = message.Substring(globalFrom, globalTo - globalFrom);
+
+            //get Uniq Motherboaerd ID
+            int uniqFrom = globalInfo.IndexOf("<UniqMotherBoardId>") + "<UniqMotherBoardId>".Length;
+            int uniqTo = globalInfo.LastIndexOf("<Name>");
+            string uniqMotherboardId = globalInfo.Substring(uniqFrom, uniqTo - uniqFrom);
+
+            //get Name
+            int systemNameFrom = globalInfo.IndexOf("<Name>") + "<Name>".Length;
+            string systemName = globalInfo
+                .Substring(systemNameFrom, globalInfo.Length - systemNameFrom);
+
+
+            return new Systems
+            {
+                Name = systemName,
+                UniqMotherBoardId = uniqMotherboardId
+            };
+        }
+
+        public static CPUs ConvertMessageToCPU(string message)
+        {
+            int cpuFrom = message.IndexOf("<cpu>") + "<cpu>".Length;
+            int cpuTo = message.LastIndexOf("</cpu>");
+            string cpuInfo = message.Substring(cpuFrom,  cpuTo - cpuFrom );
+
+            //get Name
+            int nameFrom = cpuInfo.IndexOf("<Name>") + "<Name>".Length;
+            int nameTo = cpuInfo.LastIndexOf("<Cores>");
+            string name = cpuInfo.Substring(nameFrom, nameTo - nameFrom);
+
+            //get Cores
+            int coresFrom = cpuInfo.IndexOf("<Cores>") + "<Cores>".Length;
+            int cores = int.Parse(cpuInfo.Substring(coresFrom, cpuInfo.Length - coresFrom));
+
+            return new CPUs()
+            {
+                Name = name,
+                Cores = cores
+            };
+        }
+
+        public static List<GPUs> ConvertMessageToGPUArray(string message)
+        {
+            List<GPUs> result = new List<GPUs>();
+
+            int gpuFrom = message.IndexOf("<gpu>") + "<gpu>".Length;
+            int gpuTo = message.LastIndexOf("</gpu>");
+            string gpuInfo = message.Substring(gpuFrom, gpuTo - gpuFrom);
+
+            string[] gpuArray = gpuInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string gpu in gpuArray)
+            {
+                //Name
+                int nameFrom = gpu.IndexOf("<Name>") + "<Name>".Length;
+                int nameTo = gpu.LastIndexOf("<AdapterRAM>");
+                string name = gpu.Substring(nameFrom, nameTo - nameFrom);
+
+                //Adapter RAM
+                int ramFrom = gpu.IndexOf("<AdapterRAM>") + "<AdapterRAM>".Length;
+                double adapterRAM = double.Parse(gpu.Substring(ramFrom, gpu.Length - ramFrom));
+
+                result.Add(new GPUs()
+                {
+                    Name = name,
+                    AdapterRAM = adapterRAM
+                });
+            }
+
+            return result;
+        }
+
+        public static List<OpratingSystems> ConvertMessageTOperatingSystemsList(string message)
+        {
+            List<OpratingSystems> result = new List<OpratingSystems>();
+
+            int osFrom = message.IndexOf("<operatingSystems>") + "<operatingSystems>".Length;
+            int osTo = message.LastIndexOf("</operatingSystems>");
+            string osInfo = message.Substring(osFrom, osTo - osFrom);
+
+            string[] osArray = osInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string os in osArray)
+            {
+                //Name
+                int nameFrom = os.IndexOf("<Name>") + "<Name>".Length;
+                int nameTo = os.LastIndexOf("<Architecture>");
+                string name = os.Substring(nameFrom, nameTo - nameFrom);
+
+                //Architecture
+                int arcFrom = os.IndexOf("<Architecture>") + "<Architecture>".Length;
+                int arcTo = os.LastIndexOf("<Version>");
+                string architecture = os.Substring(arcFrom, arcTo - arcFrom);
+
+                //Version
+                int versionFrom = os.IndexOf("<Version>") + "<Version>".Length;
+                string version = os.Substring(versionFrom, os.Length - versionFrom);
+
+                result.Add(new OpratingSystems()
+                {
+                    Name = name,
+                    Architecture = architecture,
+                    Version = version
+                });
+            }
+
+            return result;
+        }
+
+        public static RAMs ConvertMessageToRAM(string message)
+        {
+            int ramFrom = message.IndexOf("<ram>") + "<ram>".Length;
+            int ramTo = message.LastIndexOf("</ram>");
+            string ramInfo = message.Substring(ramFrom, ramTo - ramFrom);
+
+            double memory = double.Parse(ramInfo.Replace("<Memory>", ""));
+
+            return new RAMs()
+            {
+                Memory = memory
+            };
+        }
+
+        public static List<Drivers> ConvertMessageToDriversList(string message)
+        {
+            List<Drivers> result = new List<Drivers>();
+
+            int driverFrom = message.IndexOf("<drivers>") + "<drivers>".Length;
+            int driverTo = message.LastIndexOf("</drivers>");
+            string driversInfo = message.Substring(driverFrom, driverTo - driverFrom);
+
+            string[] driversArray = driversInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string drive in driversArray)
+            {
+                //Disk Name
+                int nameFrom = drive.IndexOf("<DiskName>") + "<DiskName>".Length;
+                int nameTo = drive.LastIndexOf("<Address>");
+                string name = drive.Substring(nameFrom, nameTo - nameFrom);
+
+                //Address
+                int addressFrom = drive.IndexOf("<Address>") + "<Address>".Length;
+                int addressTo = drive.LastIndexOf("<Type>");
+                string address = drive.Substring(addressFrom, addressTo - addressFrom);
+
+
+                //Type
+                int typeFrom = drive.IndexOf("<Type>") + "<Type>".Length;
+                int typeTo = drive.LastIndexOf("<AvailableSpace>");
+                string type = drive.Substring(typeFrom, typeTo - typeFrom);
+
+
+                //Available Space
+                int aSpaceFrom = drive.IndexOf("<AvailableSpace>") + "<AvailableSpace>".Length;
+                int aSpaceTo = drive.LastIndexOf("<TotalSpace>");
+                double availableSpace = double.Parse(drive.Substring(aSpaceFrom, aSpaceTo - aSpaceFrom));
+
+
+                //Total Space
+                int tSpaceFrom = drive.IndexOf("<TotalSpace>") + "<TotalSpace>".Length;
+                double totalSpace = double.Parse(drive.Substring(tSpaceFrom, drive.Length - tSpaceFrom));
+
+
+                result.Add(new Drivers()
+                {
+                    DiskName = name,
+                    Address = address,
+                    Type = type,
+                    AvailableSpace = availableSpace,
+                    TotalSpace = totalSpace
+                });
+            }
+
+            return result;
+        }
+
+        public static List<NetworkAdapters> ConvertMessageToNetworkAdaptersList(string message)
+        {
+            List<NetworkAdapters> result = new List<NetworkAdapters>();
+
+            int netFrom = message.IndexOf("<networkAdapters>") + "<networkAdapters>".Length;
+            int netTo = message.LastIndexOf("</networkAdapters>");
+            string networkAdaptersInfo = message.Substring(netFrom, netTo - netFrom);
+
+            string[] networkAdaptersArray = networkAdaptersInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string networkAdapter in networkAdaptersArray)
+            {
+                result.Add(new NetworkAdapters()
+                {
+                    Name = networkAdapter.Replace("<Name>", "")
+                });
+            }
+
+
+            return result;
+        }
+
+        public static List<SoundCards> ConvertMessageToSoundCardsList(string message)
+        {
+            List<SoundCards> result = new List<SoundCards>();
+
+            int soundFrom = message.IndexOf("<soundCards>") + "<soundCards>".Length;
+            int soundTo = message.LastIndexOf("</soundCards>");
+            string soundCardsInfo = message.Substring(soundFrom, soundTo - soundFrom);
+
+            string[] soundCardsArray = soundCardsInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string soundCard in soundCardsArray)
+            {
+                result.Add(new SoundCards()
+                {
+                    Name = soundCard.Replace("<Name>", "")
+                });
+            }
+
+            return result;
+        }
+
+        public static List<Printers> ConvertMessageToPrintersList(string message)
+        {
+            List<Printers> result = new List<Printers>();
+
+            int printersFrom = message.IndexOf("<printers>") + "<printers>".Length;
+            int printersTo = message.LastIndexOf("</printers>");
+            string printersInfo = message.Substring(printersFrom, printersTo - printersFrom);
+
+            string[] printersArray = printersInfo
+                .Split();
+
+            foreach (string printer in printersArray)
+            {
+                //Name
+                int nameFrom = printer.IndexOf("<Name>") + "<Name>".Length;
+                int nameTo = printer.LastIndexOf("<IsLocal>");
+                string name = printer.Substring(nameFrom, nameTo - nameFrom);
+
+                //IsLocal
+                int localFrom = printer.IndexOf("<IsLocal>") + "<IsLocal>".Length;
+                int localTo = printer.LastIndexOf("<IsNetwork>");
+                bool isLocal = bool.Parse(printer.Substring(localFrom, localTo - localFrom));
+
+                //IsNetwork
+                int networkFrom = printer.IndexOf("<IsNetwork>") + "<IsNetwork>".Length;
+                bool isNetwork = bool.Parse(printer.Substring(networkFrom, printer.Length - networkFrom));
+
+                result.Add( new Printers()
+                {
+                    Name = name,
+                    IsLocal = isLocal,
+                    IsNetwork = isNetwork
+                });
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

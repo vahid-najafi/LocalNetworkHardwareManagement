@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using LocalNetworkHardware.DataLayer.Context;
 using LocalNetworkHardwareManagement.Core.Buisness;
 using LocalNetworkHardwareManagement.Core.Helpers;
+using LocalNetworkHardwareManagement.Core.Models;
 using LocalNetworkHardwareManagement.Core.Socket_Classes;
 using LocalNetworkHardwareManagement.Core.Test;
 
@@ -198,7 +199,7 @@ namespace LocalNetworkHardwareManagement
                         //Getting Connected Nodes
                         IpAddressManagement ipManagement = new IpAddressManagement();
                         NodesList.Items.AddRange(await ipManagement.StartGettingHosts(ip.ToString()));
-                        
+
                     }
                 }
                 else

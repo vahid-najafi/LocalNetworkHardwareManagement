@@ -32,17 +32,18 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
 
             //Adding GPUs
+            string gpuMessage = "";
             if (systemModel.GPUs.Any())
             {
-                string gpuMessage = "";
                 foreach (GPUs gpu in systemModel.GPUs)
                 {
                     gpuMessage += $"<Name>{gpu.Name}<AdapterRAM>{gpu.AdapterRAM}<split>";
                 }
 
                 gpuMessage = gpuMessage.Substring(0, gpuMessage.Length - 7);
-                finalMessage += $"<gpu>{gpuMessage}</gpu>";
             }
+
+            finalMessage += $"<gpu>{gpuMessage}</gpu>";
 
 
 
@@ -61,10 +62,12 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
             //Adding RAM
             finalMessage += $"<ram><Memory>{systemModel.RAM.Memory}</ram>";
 
+
+
             //Adding Network Adapters
+            string networkAdaptersMessage = "";
             if (systemModel.NetworkAdapters.Any())
             {
-                string networkAdaptersMessage = "";
                 foreach (NetworkAdapters networkAdapter in systemModel.NetworkAdapters)
                 {
                     networkAdaptersMessage += $"<Name>{networkAdapter.Name}<split>";
@@ -72,8 +75,10 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
                 networkAdaptersMessage = networkAdaptersMessage
                     .Substring(0, networkAdaptersMessage.Length - 7);
-                finalMessage += $"<networkAdapters>{networkAdaptersMessage}</networkAdapters>";
             }
+
+            finalMessage += $"<networkAdapters>{networkAdaptersMessage}</networkAdapters>";
+
 
 
             //Adding Drivers
@@ -89,45 +94,50 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
 
 
             //Adding Sound Cards
+            string soundCardsMessage = "";
             if (systemModel.SoundCards.Any())
             {
-                string soundCardsMessage = "";
                 foreach (SoundCards soundCard in systemModel.SoundCards)
                 {
                     soundCardsMessage += $"<Name>{soundCard.Name}<split>";
                 }
 
                 soundCardsMessage = soundCardsMessage.Substring(0, soundCardsMessage.Length - 7);
-                finalMessage += $"<soundCards>{soundCardsMessage}</soundCards>";
             }
 
+            finalMessage += $"<soundCards>{soundCardsMessage}</soundCards>";
+
+
+
             //Adding Printers
+            string printersMessage = "";
             if (systemModel.Printers.Any())
             {
-                string printersMessage = "";
                 foreach (Printers printer in systemModel.Printers)
                 {
                     printersMessage += $"<Name>{printer.Name}<IsLocal>{printer.IsLocal}<IsNetwork>{printer.IsNetwork}<split>";
                 }
 
                 printersMessage = printersMessage.Substring(0, printersMessage.Length - 7);
-                finalMessage += $"<printers>{printersMessage}</printers>";
             }
+
+            finalMessage += $"<printers>{printersMessage}</printers>";
 
 
             //Adding CD-ROMs
+            string cdRomsMessage = "";
             if (systemModel.CDROMs.Any())
             {
-                string cdRomsMessage = "";
                 foreach (CdROMs cdROM in systemModel.CDROMs)
                 {
                     cdRomsMessage += $"<Description>{cdROM.Description}<Address>{cdROM.Address}<MediaType>{cdROM.MediaType}<split>";
                 }
 
                 cdRomsMessage = cdRomsMessage.Substring(0, cdRomsMessage.Length - 7);
-                finalMessage += $"<cdroms>{cdRomsMessage}</cdroms>";
-
             }
+
+            finalMessage += $"<cdroms>{cdRomsMessage}</cdroms>";
+
 
             return finalMessage;
         }
