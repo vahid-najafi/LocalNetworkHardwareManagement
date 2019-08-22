@@ -65,6 +65,18 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageForm.Designer.cs">
+      <DependentUpon>ManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PcInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PcInfoForm.Designer.cs">
+      <DependentUpon>PcInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DatabaseTest.resx">
@@ -72,6 +84,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageForm.resx">
+      <DependentUpon>ManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PcInfoForm.resx">
+      <DependentUpon>PcInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,6 +129,21 @@
       <Project>{f3ddde11-451a-40e9-9193-eeee97a6d152}</Project>
       <Name>LocalNetworkHardware.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line-menu %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line-menu-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line-menu-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\local-network %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\local-network %283%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

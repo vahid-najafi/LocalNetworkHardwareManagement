@@ -99,7 +99,7 @@ namespace LocalNetworkHardwareManagement
         private void ExitButton_MouseEnter(object sender, EventArgs e)
         {
             ExitButton.Cursor = Cursors.Hand;
-            ExitButton.ForeColor = Color.DarkRed;
+            ExitButton.ForeColor = ColorTranslator.FromHtml("#C0392B");
         }
 
         private void ExitButton_MouseLeave(object sender, EventArgs e)
@@ -117,6 +117,31 @@ namespace LocalNetworkHardwareManagement
         {
             //Should Close Nodes First
             Application.Exit();
+        }
+
+        #endregion
+
+        #region Menu Icon
+
+
+        private void MenuIcon_MouseEnter(object sender, EventArgs e)
+        {
+            menuIcon.BackgroundImage = Properties.Resources.line_menu_red;
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void MenuIcon_MouseLeave(object sender, EventArgs e)
+        {
+            menuIcon.BackgroundImage = Properties.Resources.line_menu_white;
+            this.Cursor = Cursors.Default;
+        }
+
+        private void MenuIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mainMenu.Show(this.PointToScreen(e.Location));
+            }
         }
 
         #endregion
@@ -163,6 +188,12 @@ namespace LocalNetworkHardwareManagement
             //Helper
             //DatabaseTest newForm = new DatabaseTest();
             //newForm.Show();
+
+            //ManageForm manageForm = new ManageForm("127.0.0.1");
+            //manageForm.Show();
+
+            //PcInfoForm pcInfoForm = new PcInfoForm();
+            //pcInfoForm.Show();
         }
 
         private void LoadLocalIPs()

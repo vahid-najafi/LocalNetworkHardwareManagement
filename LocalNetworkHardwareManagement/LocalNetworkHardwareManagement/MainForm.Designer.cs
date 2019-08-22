@@ -28,29 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TitlePanel = new System.Windows.Forms.Panel();
+            this.menuIcon = new System.Windows.Forms.PictureBox();
+            this.mainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showSystemInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showActivitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showNodesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.ExitButton = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ActivitiesText = new System.Windows.Forms.TextBox();
-            this.ClearButton = new System.Windows.Forms.Button();
             this.NodesList = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.FullExitButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.LocalIPsCombo = new System.Windows.Forms.ComboBox();
             this.ServerStartButton = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.TitlePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).BeginInit();
+            this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // TitlePanel
             // 
-            this.TitlePanel.BackColor = System.Drawing.Color.DimGray;
+            this.TitlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.TitlePanel.Controls.Add(this.menuIcon);
             this.TitlePanel.Controls.Add(this.TitleIcon);
             this.TitlePanel.Controls.Add(this.ExitButton);
             this.TitlePanel.Controls.Add(this.TitleLabel);
@@ -63,9 +75,90 @@
             this.TitlePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseMove);
             this.TitlePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseUp);
             // 
+            // menuIcon
+            // 
+            this.menuIcon.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.line_menu_white;
+            this.menuIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.menuIcon.ContextMenuStrip = this.mainMenu;
+            this.menuIcon.Location = new System.Drawing.Point(51, 17);
+            this.menuIcon.Name = "menuIcon";
+            this.menuIcon.Size = new System.Drawing.Size(28, 26);
+            this.menuIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.menuIcon.TabIndex = 8;
+            this.menuIcon.TabStop = false;
+            this.menuIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MenuIcon_MouseDown);
+            this.menuIcon.MouseEnter += new System.EventHandler(this.MenuIcon_MouseEnter);
+            this.menuIcon.MouseLeave += new System.EventHandler(this.MenuIcon_MouseLeave);
+            // 
+            // mainMenu
+            // 
+            this.mainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.mainMenu.DropShadowEnabled = false;
+            this.mainMenu.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showSystemInfoMenuItem,
+            this.showActivitiesMenuItem,
+            this.showNodesMenuItem,
+            this.settingsMenuItem,
+            this.aboutMenuItem,
+            this.exitMenuItem});
+            this.mainMenu.Name = "contextMenuStrip1";
+            this.mainMenu.ShowImageMargin = false;
+            this.mainMenu.Size = new System.Drawing.Size(249, 220);
+            // 
+            // showSystemInfoMenuItem
+            // 
+            this.showSystemInfoMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showSystemInfoMenuItem.Name = "showSystemInfoMenuItem";
+            this.showSystemInfoMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showSystemInfoMenuItem.Text = "نمایش جزئیات سیستم خود";
+            // 
+            // showActivitiesMenuItem
+            // 
+            this.showActivitiesMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showActivitiesMenuItem.Name = "showActivitiesMenuItem";
+            this.showActivitiesMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showActivitiesMenuItem.Text = "نمایش فعالیت های اخیر برنامه";
+            // 
+            // showNodesMenuItem
+            // 
+            this.showNodesMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showNodesMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.showNodesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showNodesMenuItem.ImageTransparentColor = System.Drawing.Color.Yellow;
+            this.showNodesMenuItem.Name = "showNodesMenuItem";
+            this.showNodesMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showNodesMenuItem.Text = "نمایش جزئیات گره های متصل";
+            // 
+            // settingsMenuItem
+            // 
+            this.settingsMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.settingsMenuItem.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.settingsMenuItem.ForeColor = System.Drawing.Color.White;
+            this.settingsMenuItem.Name = "settingsMenuItem";
+            this.settingsMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.settingsMenuItem.Text = "تنظیمات برنامه";
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.aboutMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.aboutMenuItem.Text = "درباره برنامه نویس";
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.ForeColor = System.Drawing.Color.White;
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.exitMenuItem.Text = "خروج";
+            // 
             // TitleIcon
             // 
-            this.TitleIcon.Image = global::LocalNetworkHardwareManagement.Properties.Resources.LocalNetwork;
+            this.TitleIcon.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.local_network__3_;
+            this.TitleIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TitleIcon.Location = new System.Drawing.Point(707, 9);
             this.TitleIcon.Name = "TitleIcon";
             this.TitleIcon.Size = new System.Drawing.Size(61, 42);
@@ -103,12 +196,11 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(625, 84);
+            this.label1.Location = new System.Drawing.Point(505, 84);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 30);
+            this.label1.Size = new System.Drawing.Size(263, 30);
             this.label1.TabIndex = 4;
             this.label1.Text = "فعالیت ها و پیام ها:";
             // 
@@ -123,6 +215,102 @@
             this.ActivitiesText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ActivitiesText.Size = new System.Drawing.Size(477, 284);
             this.ActivitiesText.TabIndex = 5;
+            // 
+            // NodesList
+            // 
+            this.NodesList.FormattingEnabled = true;
+            this.NodesList.ItemHeight = 20;
+            this.NodesList.Location = new System.Drawing.Point(12, 237);
+            this.NodesList.Name = "NodesList";
+            this.NodesList.Size = new System.Drawing.Size(262, 164);
+            this.NodesList.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(110, 204);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 30);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "گره های متصل:";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(492, 415);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(276, 48);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "نمایش جزئیات گره های متصل";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // FullExitButton
+            // 
+            this.FullExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.FullExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FullExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FullExitButton.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.FullExitButton.ForeColor = System.Drawing.Color.White;
+            this.FullExitButton.Location = new System.Drawing.Point(12, 415);
+            this.FullExitButton.Name = "FullExitButton";
+            this.FullExitButton.Size = new System.Drawing.Size(105, 48);
+            this.FullExitButton.TabIndex = 10;
+            this.FullExitButton.Text = "خروج";
+            this.FullExitButton.UseVisualStyleBackColor = false;
+            this.FullExitButton.Click += new System.EventHandler(this.FullExitButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.SlateGray;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(167, 415);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(276, 48);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "نمایش اطلاعات سیستم";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(14, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(260, 30);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "آیپی خود را انتخاب کنید:";
+            // 
+            // LocalIPsCombo
+            // 
+            this.LocalIPsCombo.FormattingEnabled = true;
+            this.LocalIPsCombo.Location = new System.Drawing.Point(14, 117);
+            this.LocalIPsCombo.Name = "LocalIPsCombo";
+            this.LocalIPsCombo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.LocalIPsCombo.Size = new System.Drawing.Size(260, 28);
+            this.LocalIPsCombo.TabIndex = 14;
+            // 
+            // ServerStartButton
+            // 
+            this.ServerStartButton.BackColor = System.Drawing.Color.MidnightBlue;
+            this.ServerStartButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ServerStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ServerStartButton.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.ServerStartButton.ForeColor = System.Drawing.Color.White;
+            this.ServerStartButton.Location = new System.Drawing.Point(14, 151);
+            this.ServerStartButton.Name = "ServerStartButton";
+            this.ServerStartButton.Size = new System.Drawing.Size(260, 40);
+            this.ServerStartButton.TabIndex = 15;
+            this.ServerStartButton.Text = "استارت سرور";
+            this.ServerStartButton.UseVisualStyleBackColor = false;
+            this.ServerStartButton.Click += new System.EventHandler(this.ServerStartButton_Click);
             // 
             // ClearButton
             // 
@@ -139,118 +327,6 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // NodesList
-            // 
-            this.NodesList.FormattingEnabled = true;
-            this.NodesList.ItemHeight = 20;
-            this.NodesList.Location = new System.Drawing.Point(12, 237);
-            this.NodesList.Name = "NodesList";
-            this.NodesList.Size = new System.Drawing.Size(262, 164);
-            this.NodesList.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(161, 204);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 30);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "گره های متصل:";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(505, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(263, 48);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "نمایش جزئیات گره های متصل";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // FullExitButton
-            // 
-            this.FullExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.FullExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FullExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FullExitButton.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.FullExitButton.ForeColor = System.Drawing.Color.White;
-            this.FullExitButton.Location = new System.Drawing.Point(12, 415);
-            this.FullExitButton.Name = "FullExitButton";
-            this.FullExitButton.Size = new System.Drawing.Size(92, 48);
-            this.FullExitButton.TabIndex = 10;
-            this.FullExitButton.Text = "خروج";
-            this.FullExitButton.UseVisualStyleBackColor = false;
-            this.FullExitButton.Click += new System.EventHandler(this.FullExitButton_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Olive;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(110, 415);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(175, 48);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "تنظیمات برنامه";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Green;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(291, 415);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(208, 48);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "درباره برنامه نویس";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(97, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 30);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "آیپی خود را انتخاب کنید:";
-            // 
-            // LocalIPsCombo
-            // 
-            this.LocalIPsCombo.FormattingEnabled = true;
-            this.LocalIPsCombo.Location = new System.Drawing.Point(14, 117);
-            this.LocalIPsCombo.Name = "LocalIPsCombo";
-            this.LocalIPsCombo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LocalIPsCombo.Size = new System.Drawing.Size(260, 28);
-            this.LocalIPsCombo.TabIndex = 14;
-            // 
-            // ServerStartButton
-            // 
-            this.ServerStartButton.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ServerStartButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ServerStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ServerStartButton.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.ServerStartButton.ForeColor = System.Drawing.Color.White;
-            this.ServerStartButton.Location = new System.Drawing.Point(14, 151);
-            this.ServerStartButton.Name = "ServerStartButton";
-            this.ServerStartButton.Size = new System.Drawing.Size(260, 40);
-            this.ServerStartButton.TabIndex = 15;
-            this.ServerStartButton.Text = "استارت سرور";
-            this.ServerStartButton.UseVisualStyleBackColor = false;
-            this.ServerStartButton.Click += new System.EventHandler(this.ServerStartButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -261,7 +337,6 @@
             this.Controls.Add(this.ServerStartButton);
             this.Controls.Add(this.LocalIPsCombo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.FullExitButton);
             this.Controls.Add(this.button1);
@@ -279,6 +354,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).EndInit();
+            this.mainMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -299,9 +376,17 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button FullExitButton;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox LocalIPsCombo;
         private System.Windows.Forms.Button ServerStartButton;
+        private System.Windows.Forms.PictureBox menuIcon;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showNodesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showActivitiesMenuItem;
+        private System.Windows.Forms.ContextMenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem showSystemInfoMenuItem;
     }
 }
