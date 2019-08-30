@@ -142,6 +142,16 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
             return finalMessage;
         }
 
+        public static string GetShortHardwareInfoToSend()
+        {
+            ShortSystemModel systemModel = GetShortSystemModel().Result;
+
+            string finalMessage = 
+                $"<system><Name>{systemModel.SystemName}<CPU>{systemModel.Cpu}</system>";
+
+            return finalMessage;
+        }
+
         public static async Task<GlobalSystemModel> GetGlobalSystemModel()
         {
             return await Task.Run(() => new GlobalSystemModel()
@@ -156,6 +166,15 @@ namespace LocalNetworkHardwareManagement.Core.Helpers
                 SoundCards = GetSystemSoundCards().Result,
                 CDROMs = GetConnectedCDROMs().Result,
                 Printers = GetConnectedPrinters().Result
+            });
+        }
+
+        public static async Task<ShortSystemModel> GetShortSystemModel()
+        {
+            return await Task.Run(() => new ShortSystemModel()
+            {
+                SystemName = Environment.MachineName,
+                Cpu = GetSystemCPU().Result.Name
             });
         }
 

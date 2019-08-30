@@ -28,8 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.menuIcon = new System.Windows.Forms.PictureBox();
+            this.mainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showSystemInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showActivitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showNodesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitButton = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
@@ -38,14 +48,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ipLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.sowSelectedSystemButton = new System.Windows.Forms.Button();
+            this.showThisSystemButton = new System.Windows.Forms.Button();
+            this.nodesDataGrid = new System.Windows.Forms.DataGridView();
+            this.ipCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cpuCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).BeginInit();
+            this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodesDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // TitlePanel
@@ -68,12 +82,79 @@
             // 
             this.menuIcon.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.line_menu_white;
             this.menuIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.menuIcon.ContextMenuStrip = this.mainMenu;
             this.menuIcon.Location = new System.Drawing.Point(51, 17);
             this.menuIcon.Name = "menuIcon";
             this.menuIcon.Size = new System.Drawing.Size(28, 26);
             this.menuIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.menuIcon.TabIndex = 7;
             this.menuIcon.TabStop = false;
+            // 
+            // mainMenu
+            // 
+            this.mainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.mainMenu.DropShadowEnabled = false;
+            this.mainMenu.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showSystemInfoMenuItem,
+            this.showActivitiesMenuItem,
+            this.showNodesMenuItem,
+            this.settingsMenuItem,
+            this.aboutMenuItem,
+            this.exitMenuItem});
+            this.mainMenu.Name = "contextMenuStrip1";
+            this.mainMenu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.mainMenu.ShowImageMargin = false;
+            this.mainMenu.Size = new System.Drawing.Size(249, 220);
+            // 
+            // showSystemInfoMenuItem
+            // 
+            this.showSystemInfoMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showSystemInfoMenuItem.Name = "showSystemInfoMenuItem";
+            this.showSystemInfoMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showSystemInfoMenuItem.Text = "نمایش جزئیات سیستم خود";
+            // 
+            // showActivitiesMenuItem
+            // 
+            this.showActivitiesMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showActivitiesMenuItem.Name = "showActivitiesMenuItem";
+            this.showActivitiesMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showActivitiesMenuItem.Text = "نمایش فعالیت های اخیر برنامه";
+            // 
+            // showNodesMenuItem
+            // 
+            this.showNodesMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showNodesMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.showNodesMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showNodesMenuItem.ImageTransparentColor = System.Drawing.Color.Yellow;
+            this.showNodesMenuItem.Name = "showNodesMenuItem";
+            this.showNodesMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.showNodesMenuItem.Text = "نمایش جزئیات گره های متصل";
+            // 
+            // settingsMenuItem
+            // 
+            this.settingsMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.settingsMenuItem.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.settingsMenuItem.ForeColor = System.Drawing.Color.White;
+            this.settingsMenuItem.Name = "settingsMenuItem";
+            this.settingsMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.settingsMenuItem.Text = "تنظیمات برنامه";
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.aboutMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.aboutMenuItem.Text = "درباره برنامه نویس";
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.ForeColor = System.Drawing.Color.White;
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(248, 36);
+            this.exitMenuItem.Text = "خروج";
             // 
             // ExitButton
             // 
@@ -121,8 +202,8 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.ipLabel);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.button5);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.sowSelectedSystemButton);
+            this.panel2.Controls.Add(this.showThisSystemButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 60);
             this.panel2.Name = "panel2";
@@ -131,7 +212,7 @@
             // 
             // pcNameLabel
             // 
-            this.pcNameLabel.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.pcNameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pcNameLabel.ForeColor = System.Drawing.Color.Maroon;
             this.pcNameLabel.Location = new System.Drawing.Point(51, 101);
             this.pcNameLabel.Name = "pcNameLabel";
@@ -151,7 +232,7 @@
             // 
             // ipLabel
             // 
-            this.ipLabel.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.ipLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ipLabel.ForeColor = System.Drawing.Color.Teal;
             this.ipLabel.Location = new System.Drawing.Point(479, 104);
             this.ipLabel.Name = "ipLabel";
@@ -169,47 +250,92 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "آیپی سیستم:";
             // 
-            // button5
+            // sowSelectedSystemButton
             // 
-            this.button5.BackColor = System.Drawing.Color.Teal;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(51, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(303, 48);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "نمایش جزئیات سیستم انتخاب شده";
-            this.button5.UseVisualStyleBackColor = false;
+            this.sowSelectedSystemButton.BackColor = System.Drawing.Color.Teal;
+            this.sowSelectedSystemButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sowSelectedSystemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sowSelectedSystemButton.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.sowSelectedSystemButton.ForeColor = System.Drawing.Color.White;
+            this.sowSelectedSystemButton.Location = new System.Drawing.Point(51, 19);
+            this.sowSelectedSystemButton.Name = "sowSelectedSystemButton";
+            this.sowSelectedSystemButton.Size = new System.Drawing.Size(303, 48);
+            this.sowSelectedSystemButton.TabIndex = 14;
+            this.sowSelectedSystemButton.Text = "نمایش جزئیات سیستم انتخاب شده";
+            this.sowSelectedSystemButton.UseVisualStyleBackColor = false;
+            this.sowSelectedSystemButton.Click += new System.EventHandler(this.SowSelectedSystemButton_Click);
             // 
-            // button2
+            // showThisSystemButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Crimson;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(479, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(303, 48);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "نمایش جزئیات سیستم خود";
-            this.button2.UseVisualStyleBackColor = false;
+            this.showThisSystemButton.BackColor = System.Drawing.Color.Crimson;
+            this.showThisSystemButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showThisSystemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showThisSystemButton.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.showThisSystemButton.ForeColor = System.Drawing.Color.White;
+            this.showThisSystemButton.Location = new System.Drawing.Point(479, 19);
+            this.showThisSystemButton.Name = "showThisSystemButton";
+            this.showThisSystemButton.Size = new System.Drawing.Size(303, 48);
+            this.showThisSystemButton.TabIndex = 11;
+            this.showThisSystemButton.Text = "نمایش جزئیات سیستم خود";
+            this.showThisSystemButton.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // nodesDataGrid
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 203);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(825, 490);
-            this.dataGridView1.TabIndex = 2;
+            this.nodesDataGrid.AllowUserToAddRows = false;
+            this.nodesDataGrid.AllowUserToDeleteRows = false;
+            this.nodesDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.nodesDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.nodesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.nodesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ipCol,
+            this.nameCol,
+            this.cpuCol});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.nodesDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            this.nodesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nodesDataGrid.Location = new System.Drawing.Point(0, 203);
+            this.nodesDataGrid.MultiSelect = false;
+            this.nodesDataGrid.Name = "nodesDataGrid";
+            this.nodesDataGrid.ReadOnly = true;
+            this.nodesDataGrid.RowHeadersWidth = 62;
+            this.nodesDataGrid.RowTemplate.Height = 28;
+            this.nodesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.nodesDataGrid.Size = new System.Drawing.Size(825, 490);
+            this.nodesDataGrid.TabIndex = 2;
+            // 
+            // ipCol
+            // 
+            this.ipCol.HeaderText = "آیپی سیستم";
+            this.ipCol.MinimumWidth = 8;
+            this.ipCol.Name = "ipCol";
+            this.ipCol.ReadOnly = true;
+            // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "نام سیستم";
+            this.nameCol.MinimumWidth = 8;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // cpuCol
+            // 
+            this.cpuCol.HeaderText = "پردازنده";
+            this.cpuCol.MinimumWidth = 8;
+            this.cpuCol.Name = "cpuCol";
+            this.cpuCol.ReadOnly = true;
             // 
             // ManageForm
             // 
@@ -217,7 +343,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(825, 693);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.nodesDataGrid);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.TitlePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -225,12 +351,14 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "مدیریت سیستم ها متصل";
+            this.Load += new System.EventHandler(this.ManageForm_Load);
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).EndInit();
+            this.mainMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nodesDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,16 +367,26 @@
 
         private System.Windows.Forms.Panel TitlePanel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView nodesDataGrid;
+        private System.Windows.Forms.Button showThisSystemButton;
         private System.Windows.Forms.PictureBox TitleIcon;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label ExitButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button sowSelectedSystemButton;
         private System.Windows.Forms.Label ipLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox menuIcon;
         private System.Windows.Forms.Label pcNameLabel;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ipCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cpuCol;
+        private System.Windows.Forms.ContextMenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem showSystemInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showActivitiesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showNodesMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
     }
 }

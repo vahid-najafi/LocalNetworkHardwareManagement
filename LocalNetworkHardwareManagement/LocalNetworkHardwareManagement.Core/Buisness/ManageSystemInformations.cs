@@ -21,7 +21,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             _uof = unitOfWork;
         }
 
-        public static GlobalSystemModel GetOtherSystemsInformations(string message)
+        public static GlobalSystemModel ConverMessageToGlobalSystemModel(string message)
         {
             GlobalSystemModel systemModel = new GlobalSystemModel();
 
@@ -49,6 +49,30 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             return systemModel;
         }
 
+        public static ShortSystemModel ConvertMessageToShortSystemModel(string message)
+        {
+            //Getting System Information
+            int systemFrom = message.IndexOf("<system>") + "<system>".Length;
+            int systemTo = message.LastIndexOf("</system>");
+            string systemInfo = message.Substring(systemFrom, systemTo - systemFrom);
+
+            //Getting Name
+            int nameFrom = systemInfo.IndexOf("<Name>") + "<Name>".Length;
+            int nameTo = systemInfo.LastIndexOf("<CPU>");
+            string name = systemInfo.Substring(nameFrom, nameTo - nameFrom);
+
+            //Getting CPU
+            int cpuFrom = systemInfo.IndexOf("<CPU>") + "<CPU>".Length;
+            string cpu = systemInfo
+                .Substring(cpuFrom, systemInfo.Length - cpuFrom);
+
+            return new ShortSystemModel()
+            {
+                SystemName = name,
+                Cpu = cpu
+            };
+        }
+
         public async Task<string> UpdateOwnedSystem()
         {
             GlobalSystemModel systemModel = await HardwareInformationHelper.GetGlobalSystemModel();
@@ -63,6 +87,24 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 
                 return finalMessage;
             });
+        }
+
+        public async Task AddOrUpdateThisSystem(GlobalSystemModel systemModel)
+        {
+            int systemId = _uof.SystemsRepository.CheckSystemExists(systemModel.System.UniqMotherBoardId);
+
+            if (systemId == -1)
+            {
+                //Add New System
+                _uof.SystemsRepository.Insert(systemModel.System);
+                _uof.Save();
+            }
+            else
+            {
+                systemModel.System.SystemId = systemId;
+            }
+
+            string finalMessage = CheckGlobalModel(systemModel, false);
         }
 
 
@@ -84,7 +126,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             else
             {
                 //TODO: Do The Thing You Want to do for other systems
-                systemId = -1;
+                systemId = systemModel.System.SystemId;
             }
 
 
@@ -124,6 +166,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
             //Checking Printers
             //For some reasons i decided to not insert printers now
+            //7 days later: i dont remember those reasons
 
             _uof.Save();
             return finalMessage;
@@ -695,7 +738,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             string printersInfo = message.Substring(printersFrom, printersTo - printersFrom);
 
             string[] printersArray = printersInfo
-                .Split();
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string printer in printersArray)
             {

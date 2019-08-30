@@ -243,5 +243,11 @@ namespace LocalNetworkHardwareManagement
                 ActivitiesText.Text = "متاسفانه عملیات با شکست مواجه شد." + Environment.NewLine + ActivitiesText.Text;
             }
         }
+
+        private void showNodesButton_Click(object sender, EventArgs e)
+        {
+            ManageForm manageForm = new ManageForm(LocalIPsCombo.Text);
+            manageForm.Show();
+        }
     }
 }

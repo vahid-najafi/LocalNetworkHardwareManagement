@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.ExitButton = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
@@ -44,9 +44,14 @@
             this.ipLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.activitiesText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.driversDataGrid = new System.Windows.Forms.DataGridView();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalSpaceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availableSpaceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.printersList = new System.Windows.Forms.ListBox();
@@ -58,6 +63,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.networkAdaptersList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.motherboardLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.osList = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -69,18 +76,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.motherboardLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.driversDataGrid = new System.Windows.Forms.DataGridView();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalSpaceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availableSpaceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.driversDataGrid)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -92,7 +93,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.driversDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // TitlePanel
@@ -165,7 +165,7 @@
             // 
             this.nameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.ForeColor = System.Drawing.Color.DarkCyan;
-            this.nameLabel.Location = new System.Drawing.Point(69, 14);
+            this.nameLabel.Location = new System.Drawing.Point(69, 18);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.nameLabel.Size = new System.Drawing.Size(155, 32);
@@ -205,7 +205,7 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.tabPage6.Controls.Add(this.textBox1);
+            this.tabPage6.Controls.Add(this.activitiesText);
             this.tabPage6.Controls.Add(this.label2);
             this.tabPage6.Location = new System.Drawing.Point(4, 36);
             this.tabPage6.Margin = new System.Windows.Forms.Padding(99);
@@ -215,20 +215,20 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "آخرین فعالیت های سیستم";
             // 
-            // textBox1
+            // activitiesText
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.textBox1.ForeColor = System.Drawing.Color.LavenderBlush;
-            this.textBox1.Location = new System.Drawing.Point(16, 62);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(619, 372);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "فعالیت اول\r\nفعالیت دوم\r\nفعالیت سوم";
+            this.activitiesText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.activitiesText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.activitiesText.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.activitiesText.ForeColor = System.Drawing.Color.LavenderBlush;
+            this.activitiesText.Location = new System.Drawing.Point(16, 62);
+            this.activitiesText.Multiline = true;
+            this.activitiesText.Name = "activitiesText";
+            this.activitiesText.ReadOnly = true;
+            this.activitiesText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.activitiesText.Size = new System.Drawing.Size(619, 372);
+            this.activitiesText.TabIndex = 2;
+            this.activitiesText.Text = "فعالیت اول\r\nفعالیت دوم\r\nفعالیت سوم";
             // 
             // label2
             // 
@@ -249,6 +249,103 @@
             this.tabPage5.Size = new System.Drawing.Size(651, 460);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "پارتیشن های سیستم";
+            // 
+            // driversDataGrid
+            // 
+            this.driversDataGrid.AllowUserToAddRows = false;
+            this.driversDataGrid.AllowUserToDeleteRows = false;
+            this.driversDataGrid.AllowUserToResizeRows = false;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.driversDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.driversDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.driversDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.driversDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.driversDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.driversDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameCol,
+            this.addressCol,
+            this.totalSpaceCol,
+            this.availableSpaceCol});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.driversDataGrid.DefaultCellStyle = dataGridViewCellStyle10;
+            this.driversDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.driversDataGrid.GridColor = System.Drawing.Color.White;
+            this.driversDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.driversDataGrid.MultiSelect = false;
+            this.driversDataGrid.Name = "driversDataGrid";
+            this.driversDataGrid.ReadOnly = true;
+            this.driversDataGrid.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.driversDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.driversDataGrid.RowHeadersVisible = false;
+            this.driversDataGrid.RowHeadersWidth = 62;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.driversDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.driversDataGrid.RowTemplate.Height = 28;
+            this.driversDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.driversDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.driversDataGrid.ShowEditingIcon = false;
+            this.driversDataGrid.Size = new System.Drawing.Size(645, 454);
+            this.driversDataGrid.TabIndex = 1;
+            // 
+            // nameCol
+            // 
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.nameCol.DefaultCellStyle = dataGridViewCellStyle9;
+            this.nameCol.HeaderText = "Name";
+            this.nameCol.MinimumWidth = 8;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // addressCol
+            // 
+            this.addressCol.HeaderText = "Address";
+            this.addressCol.MinimumWidth = 8;
+            this.addressCol.Name = "addressCol";
+            this.addressCol.ReadOnly = true;
+            // 
+            // totalSpaceCol
+            // 
+            this.totalSpaceCol.HeaderText = "Total Space";
+            this.totalSpaceCol.MinimumWidth = 8;
+            this.totalSpaceCol.Name = "totalSpaceCol";
+            this.totalSpaceCol.ReadOnly = true;
+            // 
+            // availableSpaceCol
+            // 
+            this.availableSpaceCol.HeaderText = "Available Space";
+            this.availableSpaceCol.MinimumWidth = 8;
+            this.availableSpaceCol.Name = "availableSpaceCol";
+            this.availableSpaceCol.ReadOnly = true;
             // 
             // tabPage3
             // 
@@ -402,6 +499,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "اطلاعات کلی";
             // 
+            // motherboardLabel
+            // 
+            this.motherboardLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motherboardLabel.ForeColor = System.Drawing.Color.Crimson;
+            this.motherboardLabel.Location = new System.Drawing.Point(107, 26);
+            this.motherboardLabel.Name = "motherboardLabel";
+            this.motherboardLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.motherboardLabel.Size = new System.Drawing.Size(304, 32);
+            this.motherboardLabel.TabIndex = 9;
+            this.motherboardLabel.Text = "MPOS7S890";
+            this.motherboardLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label5.Location = new System.Drawing.Point(417, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(140, 32);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "شناسه مادربورد:";
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.osList);
@@ -542,122 +661,6 @@
             this.tabControl1.Size = new System.Drawing.Size(659, 500);
             this.tabControl1.TabIndex = 12;
             // 
-            // motherboardLabel
-            // 
-            this.motherboardLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motherboardLabel.ForeColor = System.Drawing.Color.Crimson;
-            this.motherboardLabel.Location = new System.Drawing.Point(107, 21);
-            this.motherboardLabel.Name = "motherboardLabel";
-            this.motherboardLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.motherboardLabel.Size = new System.Drawing.Size(304, 32);
-            this.motherboardLabel.TabIndex = 9;
-            this.motherboardLabel.Text = "MPOS7S890";
-            this.motherboardLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label5.Location = new System.Drawing.Point(417, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(140, 32);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "شناسه مادربورد:";
-            // 
-            // driversDataGrid
-            // 
-            this.driversDataGrid.AllowUserToAddRows = false;
-            this.driversDataGrid.AllowUserToDeleteRows = false;
-            this.driversDataGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.driversDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.driversDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.driversDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.driversDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.driversDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.driversDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameCol,
-            this.addressCol,
-            this.totalSpaceCol,
-            this.availableSpaceCol});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.driversDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.driversDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.driversDataGrid.GridColor = System.Drawing.Color.White;
-            this.driversDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.driversDataGrid.MultiSelect = false;
-            this.driversDataGrid.Name = "driversDataGrid";
-            this.driversDataGrid.ReadOnly = true;
-            this.driversDataGrid.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.driversDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.driversDataGrid.RowHeadersVisible = false;
-            this.driversDataGrid.RowHeadersWidth = 62;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Gray;
-            this.driversDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.driversDataGrid.RowTemplate.Height = 28;
-            this.driversDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.driversDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.driversDataGrid.ShowEditingIcon = false;
-            this.driversDataGrid.Size = new System.Drawing.Size(645, 454);
-            this.driversDataGrid.TabIndex = 1;
-            // 
-            // nameCol
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.nameCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.nameCol.HeaderText = "Name";
-            this.nameCol.MinimumWidth = 8;
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            // 
-            // addressCol
-            // 
-            this.addressCol.HeaderText = "Address";
-            this.addressCol.MinimumWidth = 8;
-            this.addressCol.Name = "addressCol";
-            this.addressCol.ReadOnly = true;
-            // 
-            // totalSpaceCol
-            // 
-            this.totalSpaceCol.HeaderText = "Total Space";
-            this.totalSpaceCol.MinimumWidth = 8;
-            this.totalSpaceCol.Name = "totalSpaceCol";
-            this.totalSpaceCol.ReadOnly = true;
-            // 
-            // availableSpaceCol
-            // 
-            this.availableSpaceCol.HeaderText = "Available Space";
-            this.availableSpaceCol.MinimumWidth = 8;
-            this.availableSpaceCol.Name = "availableSpaceCol";
-            this.availableSpaceCol.ReadOnly = true;
-            // 
             // PcInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -679,6 +682,7 @@
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.driversDataGrid)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -690,7 +694,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.driversDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -731,7 +734,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox activitiesText;
         private System.Windows.Forms.Label motherboardLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView driversDataGrid;

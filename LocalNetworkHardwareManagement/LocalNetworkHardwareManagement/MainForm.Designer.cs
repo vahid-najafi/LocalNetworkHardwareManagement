@@ -45,7 +45,7 @@
             this.ActivitiesText = new System.Windows.Forms.TextBox();
             this.NodesList = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.showNodesButton = new System.Windows.Forms.Button();
             this.FullExitButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -235,19 +235,20 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "گره های متصل:";
             // 
-            // button1
+            // showNodesButton
             // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(492, 415);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(276, 48);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "نمایش جزئیات گره های متصل";
-            this.button1.UseVisualStyleBackColor = false;
+            this.showNodesButton.BackColor = System.Drawing.Color.RoyalBlue;
+            this.showNodesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showNodesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showNodesButton.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.showNodesButton.ForeColor = System.Drawing.Color.White;
+            this.showNodesButton.Location = new System.Drawing.Point(492, 415);
+            this.showNodesButton.Name = "showNodesButton";
+            this.showNodesButton.Size = new System.Drawing.Size(276, 48);
+            this.showNodesButton.TabIndex = 9;
+            this.showNodesButton.Text = "نمایش جزئیات گره های متصل";
+            this.showNodesButton.UseVisualStyleBackColor = false;
+            this.showNodesButton.Click += new System.EventHandler(this.showNodesButton_Click);
             // 
             // FullExitButton
             // 
@@ -339,7 +340,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.FullExitButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.showNodesButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NodesList);
             this.Controls.Add(this.ClearButton);
@@ -373,7 +374,7 @@
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.ListBox NodesList;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button showNodesButton;
         private System.Windows.Forms.Button FullExitButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;

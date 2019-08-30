@@ -16,6 +16,8 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             {
                 case "/get":
                     return HardwareInformationHelper.GetHardwareInfoToSend();
+                case "/getshort":
+                    return HardwareInformationHelper.GetShortHardwareInfoToSend();
                 default:
                     return "Invalid Request";
             }

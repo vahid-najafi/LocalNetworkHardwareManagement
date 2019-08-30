@@ -20,5 +20,12 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
 
             return (system != null);
         }
+
+        public int CheckSystemExists(string motherboardId)
+        {
+            Systems system = _db.Systems.SingleOrDefault(s => s.UniqMotherBoardId == motherboardId);
+
+            return (system != null) ? system.SystemId : -1;
+        }
     }
 }

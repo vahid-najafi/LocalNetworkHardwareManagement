@@ -9,5 +9,7 @@ namespace LocalNetworkHardware.DataLayer.Services
     public interface ISystemsRepository: IGenericRepository<Systems>
     {
         bool IsThisSystemExists(out Systems system);
+
+        int CheckSystemExists(string motherboardId);
     }
 }
