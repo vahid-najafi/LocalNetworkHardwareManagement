@@ -89,7 +89,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             });
         }
 
-        public async Task AddOrUpdateThisSystem(GlobalSystemModel systemModel)
+        public async Task AddOrUpdateSystem(GlobalSystemModel systemModel)
         {
             int systemId = _uof.SystemsRepository.CheckSystemExists(systemModel.System.UniqMotherBoardId);
 

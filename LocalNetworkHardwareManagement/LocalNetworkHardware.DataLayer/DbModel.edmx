@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LocalNetworkHardwareManagement_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LocalNetworkHardwareManagement_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="ActvityId" />
+          </Key>
+          <Property Name="ActvityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="CdROMs">
           <Key>
             <PropertyRef Name="CdromId" />
@@ -217,6 +225,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LocalNetworkHardwareManagement_DBModelStoreContainer">
+          <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CdROMs" EntityType="Self.CdROMs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPUs" EntityType="Self.CPUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
@@ -265,8 +274,7 @@
             <End Role="SoundCards" EntitySet="SoundCards" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LocalNetworkHardwareManagement_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -547,7 +555,16 @@
             <End Role="Systems" EntitySet="Systems" />
             <End Role="SoundCards" EntitySet="SoundCards" />
           </AssociationSet>
+          <EntitySet Name="Activities" EntityType="LocalNetworkHardwareManagement_DBModel.Activities" />
         </EntityContainer>
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="ActvityId" />
+          </Key>
+          <Property Name="ActvityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -665,6 +682,15 @@
                 <ScalarProperty Name="UniqMotherBoardId" ColumnName="UniqMotherBoardId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="LocalNetworkHardwareManagement_DBModel.Activities">
+              <MappingFragment StoreEntitySet="Activities">
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActvityId" ColumnName="ActvityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

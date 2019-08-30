@@ -36,5 +36,6 @@ namespace LocalNetworkHardware.DataLayer
         public virtual DbSet<SoundCards> SoundCards { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Systems> Systems { get; set; }
+        public virtual DbSet<Activities> Activities { get; set; }
     }
 }

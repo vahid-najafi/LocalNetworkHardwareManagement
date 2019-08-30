@@ -133,7 +133,7 @@ namespace LocalNetworkHardwareManagement
                 using (UnitOfWork uow = new UnitOfWork())
                 {
                     ManageSystemInformations manageSystem = new ManageSystemInformations(uow);
-                    manageSystem.AddOrUpdateThisSystem(systemModel);
+                    manageSystem.AddOrUpdateSystem(systemModel);
                 }
 
                 //Fill The Controls
