@@ -142,61 +142,67 @@ namespace LocalNetworkHardwareManagement
 
         private void FillControlsWithInfo(GlobalSystemModel systemModel, ActivitiesViewModel[] activities)
         {
-            //System
-            motherboardLabel.Text = systemModel.System.UniqMotherBoardId;
-            nameLabel.Text = systemModel.System.Name;
-
-            //CPU
-            cpuNameLabel.Text = systemModel.CPU.Name;
-            cpuCoresLabel.Text = systemModel.CPU.Cores.ToString();
-
-            //RAM
-            ramLabel.Text = systemModel.RAM.Memory.SizeSuffix();
-
-            //Operating Systems
-            osList.Items.AddRange(systemModel.OperatingSystems.Select(os => os.Name).ToArray());
-
-            //Network Adapters
-            networkAdaptersList.Items.AddRange(systemModel.NetworkAdapters.Select(na => na.Name).ToArray());
-
-            //Sound Cards
-            soundCardsList.Items.AddRange(systemModel.SoundCards.Select(s => s.Name).ToArray());
-
-            //GPU
-            gpuList.Items.AddRange(systemModel.GPUs.Select(g => g.Name).ToArray());
-
-            //Printers
-            printersList.Items.AddRange(systemModel.Printers.Select(p => p.Name).ToArray());
-
-            //Drivers
-            foreach (var driver in systemModel.Drivers)
+            try
             {
-                if (this.driversDataGrid.InvokeRequired)
+                //System
+                motherboardLabel.Text = systemModel.System.UniqMotherBoardId;
+                nameLabel.Text = systemModel.System.Name;
+
+                //CPU
+                cpuNameLabel.Text = systemModel.CPU.Name;
+                cpuCoresLabel.Text = systemModel.CPU.Cores.ToString();
+
+                //RAM
+                ramLabel.Text = systemModel.RAM.Memory.SizeSuffix();
+
+                //Operating Systems
+                osList.Items.AddRange(systemModel.OperatingSystems.Select(os => os.Name).ToArray());
+
+                //Network Adapters
+                networkAdaptersList.Items.AddRange(systemModel.NetworkAdapters.Select(na => na.Name).ToArray());
+
+                //Sound Cards
+                soundCardsList.Items.AddRange(systemModel.SoundCards.Select(s => s.Name).ToArray());
+
+                //GPU
+                gpuList.Items.AddRange(systemModel.GPUs.Select(g => g.Name).ToArray());
+
+                //Printers
+                printersList.Items.AddRange(systemModel.Printers.Select(p => p.Name).ToArray());
+
+                //Drivers
+                foreach (var driver in systemModel.Drivers)
                 {
-                    driversDataGrid.Invoke(new Action(() =>
+                    if (this.driversDataGrid.InvokeRequired)
                     {
-                        driversDataGrid.Rows.Add(driver.DiskName,
-                            driver.Address,
-                            driver.TotalSpace.SizeSuffix(),
-                            driver.AvailableSpace.SizeSuffix());
-                    }));
+                        driversDataGrid.Invoke(new Action(() =>
+                        {
+                            driversDataGrid.Rows.Add(driver.DiskName,
+                                driver.Address,
+                                driver.TotalSpace.SizeSuffix(),
+                                driver.AvailableSpace.SizeSuffix());
+                        }));
+                    }
+                    else
+                    {
+                        driversDataGrid.Invoke(new Action(() =>
+                        {
+                            driversDataGrid.Rows.Add(driver.DiskName,
+                                driver.Address,
+                                driver.TotalSpace.SizeSuffix(),
+                                driver.AvailableSpace.SizeSuffix());
+                        }));
+                    }
                 }
-                else
+
+                //Activities
+                foreach (ActivitiesViewModel activity in activities)
                 {
-                    driversDataGrid.Invoke(new Action(() =>
-                    {
-                        driversDataGrid.Rows.Add(driver.DiskName,
-                            driver.Address,
-                            driver.TotalSpace.SizeSuffix(),
-                            driver.AvailableSpace.SizeSuffix());
-                    }));
+                    activitiesText.Text += $"({activity.ShamsiDate}) - {activity.Description}" + Environment.NewLine;
                 }
             }
-
-            //Activities
-            foreach (ActivitiesViewModel activity in activities)
+            catch
             {
-                activitiesText.Text += $"({activity.ShamsiDate}) - {activity.Description}" + Environment.NewLine;
             }
         }
 
