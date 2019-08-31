@@ -153,6 +153,19 @@ namespace LocalNetworkHardware.DataLayer.Context
 
 
 
+        private IActivitiesRepository _activitiesRepository;
+        public IActivitiesRepository ActivitiesRepository
+        {
+            get
+            {
+                if (_activitiesRepository == null)
+                    _activitiesRepository = new ActivitiesRepository(db);
+                return _activitiesRepository;
+            }
+        }
+
+
+
         public void Save()
         {
             db.SaveChanges();

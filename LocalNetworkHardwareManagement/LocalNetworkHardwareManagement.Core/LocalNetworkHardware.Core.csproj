@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buisness\ManageSystemInformations.cs" />
+    <Compile Include="Helpers\DateConvertor.cs" />
     <Compile Include="Helpers\HardwareInformationHelper.cs" />
     <Compile Include="Helpers\ProgramStartupHelper.cs" />
     <Compile Include="Helpers\SizeFix.cs" />
+    <Compile Include="Models\ActivitiesViewModel.cs" />
     <Compile Include="Models\GlobalSystemModel.cs" />
     <Compile Include="Models\ShortSystemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

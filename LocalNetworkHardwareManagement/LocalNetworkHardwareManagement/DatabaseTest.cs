@@ -69,5 +69,10 @@ namespace LocalNetworkHardwareManagement
         {
             dataGridView1.DataSource = db.CdROMs.ToList();
         }
+
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = db.Activities.ToList();
+        }
     }
 }

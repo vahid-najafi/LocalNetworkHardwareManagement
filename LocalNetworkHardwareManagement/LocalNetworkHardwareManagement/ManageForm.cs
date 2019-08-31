@@ -217,10 +217,16 @@ namespace LocalNetworkHardwareManagement
 
                 string ipAddress = nodesDataGrid.SelectedRows[0].Cells[0].Value.ToString();
 
-                PcInfoForm infoForm = new PcInfoForm(ipAddress);
+                PcInfoForm infoForm = new PcInfoForm(ipAddress, false);
                 infoForm.ShowDialog();
             });
 
+        }
+
+        private void ShowThisSystemButton_Click(object sender, EventArgs e)
+        {
+            PcInfoForm infoForm = new PcInfoForm(ipLabel.Text, true);
+            infoForm.ShowDialog();
         }
     }
 }

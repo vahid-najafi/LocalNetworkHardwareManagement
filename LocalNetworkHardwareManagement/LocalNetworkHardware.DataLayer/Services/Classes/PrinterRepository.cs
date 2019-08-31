@@ -13,5 +13,10 @@ namespace LocalNetworkHardware.DataLayer.Services.Classes
         {
             
         }
+
+        public IEnumerable<Printers> GetAllSystemPrinters(int systemId)
+        {
+            return _db.Printers.Where(p => p.SystemId == systemId).ToList();
+        }
     }
 }

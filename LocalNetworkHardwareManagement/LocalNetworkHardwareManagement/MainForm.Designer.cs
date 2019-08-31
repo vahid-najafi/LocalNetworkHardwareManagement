@@ -47,7 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.showNodesButton = new System.Windows.Forms.Button();
             this.FullExitButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnShowSystemInfo = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.LocalIPsCombo = new System.Windows.Forms.ComboBox();
             this.ServerStartButton = new System.Windows.Forms.Button();
@@ -265,19 +265,20 @@
             this.FullExitButton.UseVisualStyleBackColor = false;
             this.FullExitButton.Click += new System.EventHandler(this.FullExitButton_Click);
             // 
-            // button3
+            // btnShowSystemInfo
             // 
-            this.button3.BackColor = System.Drawing.Color.SlateGray;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(167, 415);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(276, 48);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "نمایش اطلاعات سیستم";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnShowSystemInfo.BackColor = System.Drawing.Color.SlateGray;
+            this.btnShowSystemInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnShowSystemInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowSystemInfo.Font = new System.Drawing.Font("B Mitra", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.btnShowSystemInfo.ForeColor = System.Drawing.Color.White;
+            this.btnShowSystemInfo.Location = new System.Drawing.Point(167, 415);
+            this.btnShowSystemInfo.Name = "btnShowSystemInfo";
+            this.btnShowSystemInfo.Size = new System.Drawing.Size(276, 48);
+            this.btnShowSystemInfo.TabIndex = 11;
+            this.btnShowSystemInfo.Text = "نمایش اطلاعات سیستم";
+            this.btnShowSystemInfo.UseVisualStyleBackColor = false;
+            this.btnShowSystemInfo.Click += new System.EventHandler(this.BtnShowSystemInfo_Click);
             // 
             // label3
             // 
@@ -338,7 +339,7 @@
             this.Controls.Add(this.ServerStartButton);
             this.Controls.Add(this.LocalIPsCombo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnShowSystemInfo);
             this.Controls.Add(this.FullExitButton);
             this.Controls.Add(this.showNodesButton);
             this.Controls.Add(this.label2);
@@ -376,7 +377,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button showNodesButton;
         private System.Windows.Forms.Button FullExitButton;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnShowSystemInfo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox LocalIPsCombo;
         private System.Windows.Forms.Button ServerStartButton;

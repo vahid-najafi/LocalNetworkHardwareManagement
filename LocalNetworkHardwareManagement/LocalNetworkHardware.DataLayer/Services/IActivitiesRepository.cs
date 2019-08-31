@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LocalNetworkHardware.DataLayer.Services
 {
-    public interface IPrinterRepository: IGenericRepository<Printers>
+    public interface IActivitiesRepository: IGenericRepository<Activities>
     {
-        IEnumerable<Printers> GetAllSystemPrinters(int systemId);
+
+        IEnumerable<Activities> GetRecentActivities();
+
     }
 }

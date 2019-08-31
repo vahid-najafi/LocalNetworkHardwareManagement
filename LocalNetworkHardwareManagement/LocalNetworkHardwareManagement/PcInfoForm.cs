@@ -22,10 +22,20 @@ namespace LocalNetworkHardwareManagement
         private Point _dragCursorPoint;
         private Point _dragFormPoint;
         private IPAddress _ip;
+        private bool _isOwned;
 
-        public PcInfoForm(string ipAddress)
+        public PcInfoForm(string ipAddress, bool isOwned)
         {
-            IPAddress.TryParse(ipAddress, out _ip);
+            _isOwned = isOwned;
+            if (!IPAddress.TryParse(ipAddress, out _ip))
+            {
+                if (!_isOwned)
+                {
+                    MessageBox.Show("آیپی سیستم مقصد نا معتبر می باشد", "خطا",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+            }
             InitializeComponent();
         }
 
@@ -116,38 +126,21 @@ namespace LocalNetworkHardwareManagement
 
         private void PcInfoForm_Load(object sender, EventArgs e)
         {
+            if (_ip != null)
+                ipLabel.Text = _ip.ToString();
 
-            if (String.IsNullOrEmpty(_ip.ToString()))
-                MessageBox.Show("Error");
-
-            ipLabel.Text = _ip.ToString();
-
-            AsynchronousClient client = new AsynchronousClient();
-            string recievedMessage = client.StartClient("/get", _ip);
-
-            if (recievedMessage.Contains("<global>"))
+            if (_isOwned)
             {
-                GlobalSystemModel systemModel = ManageSystemInformations.ConverMessageToGlobalSystemModel(recievedMessage);
-
-                //Add Or Update This System
-                using (UnitOfWork uow = new UnitOfWork())
-                {
-                    ManageSystemInformations manageSystem = new ManageSystemInformations(uow);
-                    manageSystem.AddOrUpdateSystem(systemModel);
-                }
-
-                //Fill The Controls
-                CleanControls();
-                FillControlsWithInfo(systemModel);
+                ShowMySystemInfo();
             }
             else
             {
-                MessageBox.Show(recievedMessage);
-                this.Close();
+                GetConnectedSystemInfo();
             }
+
         }
 
-        private void FillControlsWithInfo(GlobalSystemModel systemModel)
+        private void FillControlsWithInfo(GlobalSystemModel systemModel, ActivitiesViewModel[] activities)
         {
             //System
             motherboardLabel.Text = systemModel.System.UniqMotherBoardId;
@@ -165,6 +158,9 @@ namespace LocalNetworkHardwareManagement
 
             //Network Adapters
             networkAdaptersList.Items.AddRange(systemModel.NetworkAdapters.Select(na => na.Name).ToArray());
+
+            //Sound Cards
+            soundCardsList.Items.AddRange(systemModel.SoundCards.Select(s => s.Name).ToArray());
 
             //GPU
             gpuList.Items.AddRange(systemModel.GPUs.Select(g => g.Name).ToArray());
@@ -197,8 +193,11 @@ namespace LocalNetworkHardwareManagement
                 }
             }
 
-            //TODO: Activities
-
+            //Activities
+            foreach (ActivitiesViewModel activity in activities)
+            {
+                activitiesText.Text += $"({activity.ShamsiDate}) - {activity.Description}" + Environment.NewLine;
+            }
         }
 
         private void CleanControls()
@@ -225,6 +224,52 @@ namespace LocalNetworkHardwareManagement
             driversDataGrid.Refresh();
 
             activitiesText.Text = "";
+        }
+
+        private void GetConnectedSystemInfo()
+        {
+            //Start Client
+            AsynchronousClient client = new AsynchronousClient();
+            string recievedMessage = client.StartClient("/get", _ip);
+
+            if (recievedMessage.Contains("<global>"))
+            {
+                //Getting Activities And System Model From Message
+                ActivitiesViewModel[] activities;
+                GlobalSystemModel systemModel = ManageSystemInformations
+                    .ConverMessageToGlobalSystemModel(recievedMessage, out activities);
+
+                //Add Or Update This System
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    ManageSystemInformations manageSystem = new ManageSystemInformations(uow, false);
+                    manageSystem.AddOrUpdateSystem(systemModel);
+                }
+
+                //Fill The Controls
+                CleanControls();
+                FillControlsWithInfo(systemModel, activities);
+            }
+            else
+            {
+                MessageBox.Show(recievedMessage);
+                this.Close();
+            }
+        }
+
+        private async void ShowMySystemInfo()
+        {
+            ActivitiesViewModel[] activities;
+            GlobalSystemModel systemModel = await HardwareInformationHelper.GetGlobalSystemModel();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                ManageSystemInformations systemInformations =
+                    new ManageSystemInformations(uow, false);
+                activities = systemInformations.GetSystemActivitiesToShow().ToArray();
+            }
+
+            CleanControls();
+            FillControlsWithInfo(systemModel, activities);
         }
     }
 }

@@ -170,7 +170,6 @@
             this.nameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.nameLabel.Size = new System.Drawing.Size(155, 32);
             this.nameLabel.TabIndex = 3;
-            this.nameLabel.Text = "Vahid-Pc";
             this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -190,7 +189,6 @@
             this.ipLabel.Name = "ipLabel";
             this.ipLabel.Size = new System.Drawing.Size(132, 32);
             this.ipLabel.TabIndex = 1;
-            this.ipLabel.Text = "192.168.1.1";
             this.ipLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -261,7 +259,7 @@
             this.driversDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("B Mitra", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -508,7 +506,6 @@
             this.motherboardLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.motherboardLabel.Size = new System.Drawing.Size(304, 32);
             this.motherboardLabel.TabIndex = 9;
-            this.motherboardLabel.Text = "MPOS7S890";
             this.motherboardLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
@@ -572,7 +569,6 @@
             this.ramLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ramLabel.Size = new System.Drawing.Size(203, 32);
             this.ramLabel.TabIndex = 7;
-            this.ramLabel.Text = "12 GB";
             this.ramLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
@@ -610,7 +606,6 @@
             this.cpuCoresLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cpuCoresLabel.Size = new System.Drawing.Size(58, 32);
             this.cpuCoresLabel.TabIndex = 5;
-            this.cpuCoresLabel.Text = "4";
             this.cpuCoresLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cpuNameLabel
@@ -622,7 +617,6 @@
             this.cpuNameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cpuNameLabel.Size = new System.Drawing.Size(449, 32);
             this.cpuNameLabel.TabIndex = 4;
-            this.cpuNameLabel.Text = "Intel Core i7 8550U";
             this.cpuNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8

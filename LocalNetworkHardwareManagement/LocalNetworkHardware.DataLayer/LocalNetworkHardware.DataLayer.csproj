@@ -110,6 +110,7 @@
     <Compile Include="RAMs.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Classes\ActivitiesRepository.cs" />
     <Compile Include="Services\Classes\CdromRepository.cs" />
     <Compile Include="Services\Classes\CpuRepository.cs" />
     <Compile Include="Services\Classes\DriverRepository.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Services\Classes\RamRepository.cs" />
     <Compile Include="Services\Classes\SoundCardRepository.cs" />
     <Compile Include="Services\Classes\SystemsRepository.cs" />
+    <Compile Include="Services\IActivitiesRepository.cs" />
     <Compile Include="Services\ICdromRepository.cs" />
     <Compile Include="Services\ICpuRepository.cs" />
     <Compile Include="Services\IDriverRepository.cs" />

@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LocalNetworkHardware.DataLayer;
 using LocalNetworkHardware.DataLayer.Context;
 using LocalNetworkHardwareManagement.Core.Buisness;
 using LocalNetworkHardwareManagement.Core.Helpers;
@@ -171,7 +172,7 @@ namespace LocalNetworkHardwareManagement
             //checking global system information in startup
             using (UnitOfWork uof = new UnitOfWork())
             {
-                ManageSystemInformations manageSystem = new ManageSystemInformations(uof);
+                ManageSystemInformations manageSystem = new ManageSystemInformations(uof, true);
                 ActivitiesText.Text = (await manageSystem.UpdateOwnedSystem())
                     .Replace("<newLine>", Environment.NewLine) + Environment.NewLine + ActivitiesText.Text;
             }
@@ -188,12 +189,6 @@ namespace LocalNetworkHardwareManagement
             //Helper
             //DatabaseTest newForm = new DatabaseTest();
             //newForm.Show();
-
-            //ManageForm manageForm = new ManageForm("127.0.0.1");
-            //manageForm.Show();
-
-            //PcInfoForm pcInfoForm = new PcInfoForm();
-            //pcInfoForm.Show();
         }
 
         private void LoadLocalIPs()
@@ -238,7 +233,7 @@ namespace LocalNetworkHardwareManagement
                     ActivitiesText.Text = "آیپی وارد شده اشتباه می باشد." + Environment.NewLine + ActivitiesText.Text;
                 }
             }
-            catch (Exception exception)
+            catch //(Exception exception)
             {
                 ActivitiesText.Text = "متاسفانه عملیات با شکست مواجه شد." + Environment.NewLine + ActivitiesText.Text;
             }
@@ -248,6 +243,16 @@ namespace LocalNetworkHardwareManagement
         {
             ManageForm manageForm = new ManageForm(LocalIPsCombo.Text);
             manageForm.Show();
+        }
+
+        private void BtnShowSystemInfo_Click(object sender, EventArgs e)
+        {
+            //Helper
+            //DatabaseTest newForm = new DatabaseTest();
+            //newForm.Show();
+
+            PcInfoForm infoForm = new PcInfoForm(LocalIPsCombo.Text, true);
+            infoForm.ShowDialog();
         }
     }
 }

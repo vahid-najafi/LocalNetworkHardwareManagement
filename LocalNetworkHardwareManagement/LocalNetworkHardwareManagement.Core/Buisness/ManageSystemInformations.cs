@@ -14,14 +14,18 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
     public class ManageSystemInformations
     {
         private UnitOfWork _uof;
+        private bool _recordChanges;
 
 
-        public ManageSystemInformations(UnitOfWork unitOfWork)
+        public ManageSystemInformations(UnitOfWork unitOfWork, bool recordChanges)
         {
             _uof = unitOfWork;
+            _recordChanges = recordChanges;
         }
 
-        public static GlobalSystemModel ConverMessageToGlobalSystemModel(string message)
+        #region Static Convert Messages
+
+        public static GlobalSystemModel ConverMessageToGlobalSystemModel(string message, out ActivitiesViewModel[] activities)
         {
             GlobalSystemModel systemModel = new GlobalSystemModel();
 
@@ -45,6 +49,8 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             systemModel.SoundCards = ConvertMessageToSoundCardsList(message);
 
             systemModel.Printers = ConvertMessageToPrintersList(message);
+
+            activities = ConvertMessageToActivities(message);
 
             return systemModel;
         }
@@ -73,10 +79,15 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             };
         }
 
+        #endregion
+
+
+        #region Database Methods
+
         public async Task<string> UpdateOwnedSystem()
         {
             GlobalSystemModel systemModel = await HardwareInformationHelper.GetGlobalSystemModel();
-            
+
             string finalMessage = "";
 
 
@@ -84,7 +95,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             {
                 finalMessage = CheckGlobalModel(systemModel, true);
 
-                
+
                 return finalMessage;
             });
         }
@@ -107,6 +118,42 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             string finalMessage = CheckGlobalModel(systemModel, false);
         }
 
+        public string GetSystemActvities()
+        {
+            string finalMessage = "";
+
+            IEnumerable<Activities> activities = _uof.ActivitiesRepository.GetRecentActivities();
+
+            foreach (Activities activity in activities)
+            {
+                finalMessage += $"<Description>{activity.Description}<Date>{activity.EventDate.ToShamsi()}<split>";
+            }
+
+            if (finalMessage.EndsWith("<split>"))
+                finalMessage.Substring(0, finalMessage.Length - 7);
+
+            return $"<activties>{finalMessage}</activties>";
+        }
+
+        public List<ActivitiesViewModel> GetSystemActivitiesToShow()
+        {
+            List<ActivitiesViewModel> activitiesList = new List<ActivitiesViewModel>();
+
+            IEnumerable<Activities> activities = _uof.ActivitiesRepository.GetRecentActivities();
+
+            foreach (Activities activity in activities)
+            {
+                activitiesList.Add(new ActivitiesViewModel()
+                {
+                    Description = activity.Description,
+                    ShamsiDate = activity.EventDate.ToShamsi()
+                });
+            }
+
+            return activitiesList;
+        }
+
+        #endregion
 
         //TODO: Has One
         #region Checks
@@ -125,7 +172,6 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             }
             else
             {
-                //TODO: Do The Thing You Want to do for other systems
                 systemId = systemModel.System.SystemId;
             }
 
@@ -138,6 +184,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             //Checking Drivers
             finalMessage += CheckDrivers(systemModel.Drivers, systemId);
 
+            //_uof.Save();
 
             //Checking GPUs
             finalMessage += CheckGPU(systemModel.GPUs, systemId);
@@ -166,7 +213,8 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
             //Checking Printers
             //For some reasons i decided to not insert printers now
-            //7 days later: i dont remember those reasons
+            //7 days later: i don't remember those reasons so i just do it
+            finalMessage += CheckPrinters(systemModel.Printers, systemId);
 
             _uof.Save();
             return finalMessage;
@@ -186,16 +234,24 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 if (HardwareInformationHelper
                     .CheckGlobalSystemChanges(system, model, out resultMessage))
                 {
+                    string msg = "اطلاعات سیستم بروزرسانی شد.";
                     _uof.SystemsRepository.Update(model);
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
                     _uof.Save();
-                    resultMessage += " اطلاعات سیستم بروزرسانی شد.<newLine>";
+                    resultMessage += $" {msg}<newLine>";
                 }
             }
             else
             {
+                string msg = "اطلاعات سیستم ثبت شد.";
                 _uof.SystemsRepository.Insert(model);
+                if (_recordChanges)
+                    _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
                 _uof.Save();
-                resultMessage += "اطلاعات سیستم ثبت شد.<newLine>";
+                resultMessage += $"{msg}<newLine>";
             }
 
             return model.SystemId;
@@ -212,16 +268,22 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 if (HardwareInformationHelper
                     .CheckSystemCpuChanges(cpu, model, out string resultMessage))
                 {
+                    string msg = "اطلاعات پردازنده بروزرسانی شد.";
                     model.CpuId = cpu.CpuId;
                     _uof.CpuRepository.Update(model);
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
                     finalMessage += resultMessage;
-                    finalMessage += "اطلاعات پردازنده بروزرسانی شد.<newLine>";
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
             else
             {
+                string msg = "اطلاعات پردازنده ثبت شد.";
                 _uof.CpuRepository.Insert(model);
-                finalMessage += "اطلاعات پردازنده ثبت شد.<newLine>";
+                if (_recordChanges)
+                    _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+                finalMessage += $"{msg}<newLine>";
             }
 
             return finalMessage;
@@ -249,16 +311,46 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                     if (_uof.DriverRepository.IsDriverExists(systemId, driver.Address,
                         out Drivers existingDriver))
                     {
+                        //Check for driver changes
+                        //resultMessage: changes that recognized
                         if (HardwareInformationHelper
                             .CheckDriverChanges(existingDriver, driver, out string resultMessage))
                         {
+                            //adding detected changes to return message
+                            if (!string.IsNullOrEmpty(resultMessage))
+                                finalMessage += resultMessage;
+
                             driver.DriverId = existingDriver.DriverId;
                             _uof.DriverRepository.Update(driver);
+
+                            //Save Activities
+                            if ((_recordChanges) && (!string.IsNullOrEmpty(resultMessage)))
+                            {
+                                string[] actArray = resultMessage.Split(new string[] { "<newLine>" },
+                                    StringSplitOptions.RemoveEmptyEntries);
+
+                                foreach (string activity in actArray)
+                                {
+                                    _uof.ActivitiesRepository.Insert(new Activities()
+                                    {
+                                        Description = activity,
+                                        EventDate = DateTime.Now
+                                    });
+                                }
+                            }
                         }
                     }
                     else
                     {
                         _uof.DriverRepository.Insert(driver);
+                        if (_recordChanges)
+                        {
+                            _uof.ActivitiesRepository.Insert(new Activities()
+                            {
+                                Description = $"درایو {driver.Address} ثبت شد.",
+                                EventDate = DateTime.Now
+                            });
+                        }
                     }
                 }
 
@@ -284,8 +376,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             {
                 if (compareList.All(c => c.Name != gpu.Name))
                 {
+                    string msg = "گرافیک کارت قدیمی شناسایی و حذف شد.";
                     _uof.GpuRepository.Delete(gpu);
-                    finalMessage += "گرافیک کارت قدیمی شناسایی و حذف شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -295,8 +392,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
                 if (compareList.All(c => c.Name != gpu.Name))
                 {
+                    string msg = "گرافیک کارت جدید شناسایی شد.";
                     _uof.GpuRepository.Insert(gpu);
-                    finalMessage += "گرافیک کارت جدید شناسایی شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -341,14 +443,24 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                     os.OsId = similarOs.OsId;
                     if (!similarOs.Version.Equals(os.Version))
                     {
+                        string msg = "سیستم عامل بروزرسانی شده است.";
                         _uof.OprativeSystemRepository.Update(os);
-                        finalMessage += "سیستم عامل بروزرسانی شده است.<newLine>";
+
+                        if (_recordChanges)
+                            _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                        finalMessage += $"{msg}<newLine>";
                     }
                 }
                 else
                 {
+                    string msg = "سیستم عامل جدید ثبت شد.";
                     _uof.OprativeSystemRepository.Insert(os);
-                    finalMessage += "سیستم عامل جدید شناسایی شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -374,8 +486,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             {
                 if (adaptersCompareList.All(n => n.Name != adapter.Name))
                 {
+                    string msg = "کارت شبک قدیمی شناسایی و حذف شد.";
                     _uof.NetworkAdaptersRepository.Delete(adapter);
-                    finalMessage += "کارت شبک قدیمی شناسایی و حذف شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -386,8 +503,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
                 if (adaptersCompareList.All(n => n.Name != adapter.Name))
                 {
+                    string msg = "کارت شبکه جدید اضافه شد.";
                     _uof.NetworkAdaptersRepository.Insert(adapter);
-                    finalMessage += "کارت شبکه جدید اضافه شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -406,14 +528,24 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
 
                 if (model.Memory != existingRAM.Memory)
                 {
+                    string msg = "رم جدید سیستم شناسایی و ثبت شد.";
                     _uof.RamRepository.Update(model);
-                    finalMessage += "رم جدید سیستم شناسایی و ثبت شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
             else
             {
+                string msg = "رم سیستم ثبت شد.";
                 _uof.RamRepository.Insert(model);
-                finalMessage += "رم سیستم ثبت شد.<newLine>";
+
+                if (_recordChanges)
+                    _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                finalMessage += $"{msg}<newLine>";
             }
 
             return finalMessage;
@@ -437,8 +569,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             {
                 if (soundCardsCompareList.All(s => s.Name != soundCard.Name))
                 {
+                    string msg = "کارت صدای قدیمی شناسایی و حذف شد.";
                     _uof.SoundCardRepository.Delete(soundCard);
-                    finalMessage += "کارت صدای قدیمی شناسایی و حذف شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -448,8 +585,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 soundCard.SystemId = systemId;
                 if (soundCardsCompareList.All(s => s.Name != soundCard.Name))
                 {
+                    string msg = "کارت صدای جدید ثبت شد.";
                     _uof.SoundCardRepository.Insert(soundCard);
-                    finalMessage += "کارت صدای جدید ثبت شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -476,8 +618,13 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 if (cdRomsCompareList.All(c =>
                     c.Description != cdRom.Description && c.MediaType != cdRom.MediaType))
                 {
+                    string msg = "سی دی رام قدیمی شناسایی و حذف شد.";
                     _uof.CdromRepository.Delete(cdRom);
-                    finalMessage += "سی دی رام قدیمی شناسایی و حذف شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -488,8 +635,60 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 if (cdRomsCompareList.All(c =>
                     c.Description != cdRom.Description && c.MediaType != cdRom.MediaType))
                 {
+                    string msg = "سی دی رام جدید ثبت شد.";
                     _uof.CdromRepository.Insert(cdRom);
-                    finalMessage += "سی دی رام جدید ثبت شد.<newLine>";
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
+                }
+            }
+
+            return finalMessage;
+        }
+
+        public string CheckPrinters(IEnumerable<Printers> modelList, int systemId)
+        {
+            string finalMessage = "";
+
+            IEnumerable<Printers> databasePrintersList = 
+                _uof.PrinterRepository.GetAllSystemPrinters(systemId);
+
+            IEnumerable<Printers> printersCompareList = databasePrintersList.Join(modelList,
+                o => o.Name, i => i.Name, (fromDatabase, fromModel) => new Printers()
+                {
+                    Name = fromDatabase.Name
+                }).ToList();
+
+            //Checking for extra records in database
+            foreach (Printers printer in databasePrintersList)
+            {
+                if (printersCompareList.All(s => s.Name != printer.Name))
+                {
+                    string msg = "پرینتر قدیمی شناسایی و حذف شد.";
+                    _uof.PrinterRepository.Delete(printer);
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
+                }
+            }
+
+            //Checking for new printers
+            foreach (Printers printer in modelList)
+            {
+                printer.SystemId = systemId;
+                if (printersCompareList.All(s => s.Name != printer.Name))
+                {
+                    string msg = "پرینتر جدید ثبت شد.";
+                    _uof.PrinterRepository.Insert(printer);
+
+                    if (_recordChanges)
+                        _uof.ActivitiesRepository.Insert(new Activities() { Description = msg, EventDate = DateTime.Now });
+
+                    finalMessage += $"{msg}<newLine>";
                 }
             }
 
@@ -499,6 +698,38 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
         #endregion
 
         #region Covert Message To Class
+
+        public static ActivitiesViewModel[] ConvertMessageToActivities(string message)
+        {
+            List<ActivitiesViewModel> activitiesList = new List<ActivitiesViewModel>();
+
+            int actFrom = message.IndexOf("<activties>") + "<activties>".Length;
+            int actTo = message.LastIndexOf("</activties>");
+            string actInfo = message.Substring(actFrom, actTo - actFrom);
+
+            string[] actArray = actInfo
+                .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string activity in actArray)
+            {
+                //Description
+                int desFrom = activity.IndexOf("<Description>") + "<Description>".Length;
+                int desTo = activity.LastIndexOf("<Date>");
+                string description = activity.Substring(desFrom, desTo - desFrom);
+
+                //Date
+                int dateFrom = activity.IndexOf("<Date>") + "<Date>".Length;
+                string eventDate = activity.Substring(dateFrom, activity.Length - dateFrom);
+
+                activitiesList.Add(new ActivitiesViewModel()
+                {
+                    Description = description,
+                    ShamsiDate = eventDate
+                });
+            }
+
+            return activitiesList.ToArray();
+        }
 
         public static Systems ConvertMessageToSystems(string message)
         {
@@ -528,7 +759,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
         {
             int cpuFrom = message.IndexOf("<cpu>") + "<cpu>".Length;
             int cpuTo = message.LastIndexOf("</cpu>");
-            string cpuInfo = message.Substring(cpuFrom,  cpuTo - cpuFrom );
+            string cpuInfo = message.Substring(cpuFrom, cpuTo - cpuFrom);
 
             //get Name
             int nameFrom = cpuInfo.IndexOf("<Name>") + "<Name>".Length;
@@ -756,7 +987,7 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
                 int networkFrom = printer.IndexOf("<IsNetwork>") + "<IsNetwork>".Length;
                 bool isNetwork = bool.Parse(printer.Substring(networkFrom, printer.Length - networkFrom));
 
-                result.Add( new Printers()
+                result.Add(new Printers()
                 {
                     Name = name,
                     IsLocal = isLocal,
