@@ -50,7 +50,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.LocalIPsCombo = new System.Windows.Forms.ComboBox();
             this.ServerStartButton = new System.Windows.Forms.Button();
-            this.ClearButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ConnectedIPsTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -58,6 +57,7 @@
             this.showMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.about2MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exit2MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearButton = new System.Windows.Forms.Button();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).BeginInit();
             this.mainMenu.SuspendLayout();
@@ -306,21 +306,6 @@
             this.ServerStartButton.UseVisualStyleBackColor = false;
             this.ServerStartButton.Click += new System.EventHandler(this.ServerStartButton_Click);
             // 
-            // ClearButton
-            // 
-            this.ClearButton.BackColor = System.Drawing.Color.SeaShell;
-            this.ClearButton.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.eraser__1_;
-            this.ClearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClearButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.ClearButton.Location = new System.Drawing.Point(291, 84);
-            this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(30, 27);
-            this.ClearButton.TabIndex = 6;
-            this.ClearButton.UseVisualStyleBackColor = false;
-            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
-            // 
             // ConnectedIPsTimer
             // 
             this.ConnectedIPsTimer.Interval = 60000;
@@ -373,6 +358,21 @@
             this.exit2MenuItem.Size = new System.Drawing.Size(173, 36);
             this.exit2MenuItem.Text = "خروج";
             this.exit2MenuItem.Click += new System.EventHandler(this.Exit2MenuItem_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.BackColor = System.Drawing.Color.SeaShell;
+            this.ClearButton.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.eraser__1_;
+            this.ClearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClearButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClearButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.ClearButton.Location = new System.Drawing.Point(291, 84);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(30, 27);
+            this.ClearButton.TabIndex = 6;
+            this.ClearButton.UseVisualStyleBackColor = false;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // MainForm
             // 

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LocalNetworkHardware.DataLayer;
@@ -26,8 +28,12 @@ namespace LocalNetworkHardwareManagement
         private Point _dragCursorPoint;
         private Point _dragFormPoint;
 
+        private IPAddress _serverIP;
+        private CancellationTokenSource _tokenSource;
+
         public MainForm()
         {
+            _tokenSource = null;
             InitializeComponent();
         }
 
@@ -171,7 +177,7 @@ namespace LocalNetworkHardwareManagement
                     .Replace("<newLine>", Environment.NewLine) + Environment.NewLine + ActivitiesText.Text;
             }
 
-            //Getting Connected Nodes
+            //Getting system ips
             LoadLocalIPs();
 
             //Starting server to communicate with other nodes
@@ -197,42 +203,71 @@ namespace LocalNetworkHardwareManagement
 
         private async void ServerStartButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(LocalIPsCombo.Text))
+            if (ServerStartButton.Text == "استارت سرور")
             {
-                MessageBox.Show("لطفا آیپی خود را انتخاب کنید.", "توجه",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                if (IPAddress.TryParse(LocalIPsCombo.Text, out IPAddress ip))
+                if (string.IsNullOrEmpty(LocalIPsCombo.Text))
                 {
-                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    MessageBox.Show("لطفا آیپی خود را انتخاب کنید.", "توجه",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                try
+                {
+                    if (IPAddress.TryParse(LocalIPsCombo.Text, out IPAddress ip))
                     {
-                        //Saving Default IP Address
-                        Properties.Settings.Default.LocalNetworkIP = LocalIPsCombo.Text;
-                        Properties.Settings.Default.Save();
+                        if (ip.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            //Saving Default IP Address
+                            Properties.Settings.Default.LocalNetworkIP = LocalIPsCombo.Text;
+                            Properties.Settings.Default.Save();
 
-                        //Starting Server
-                        Task.Run(() => AsynchronousSocketListener.StartListening());
-                        ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
+                            //Starting Server
+                            Task.Run(() =>
+                            {
+                                AsynchronousSocketListener.StartListening();
+                            });
+                            _serverIP = ip;
+                            ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;
 
-                        //Getting Connected Nodes
-                        IpAddressManagement ipManagement = new IpAddressManagement();
-                        NodesList.Items.AddRange(await ipManagement.StartGettingHosts(ip.ToString()));
+                            //Getting Connected Nodes
+                            await ShowConnectedNodes(ip.ToString());
 
+                            ConnectedIPsTimer.Start();
+                            ServerStartButton.Text = "توقف سرور";
+                            ServerStartButton.BackColor = Color.Firebrick;
+
+                        }
+                    }
+                    else
+                    {
+                        ActivitiesText.Text = "آیپی وارد شده معتبر می باشد." + Environment.NewLine + ActivitiesText.Text;
                     }
                 }
-                else
+                catch //(Exception exception)
                 {
-                    ActivitiesText.Text = "آیپی وارد شده معتبر می باشد." + Environment.NewLine + ActivitiesText.Text;
+                    ActivitiesText.Text = "متاسفانه عملیات استارت سرور با شکست مواجه شد." + Environment.NewLine + ActivitiesText.Text;
                 }
             }
-            catch //(Exception exception)
+            else
             {
-                ActivitiesText.Text = "متاسفانه عملیات استارت سرور با شکست مواجه شد." + Environment.NewLine + ActivitiesText.Text;
+                /*
+                 * This Code Will Restart Application To Prevent Slowing Application If User Tries To Spam Servers
+                 */
+                ProcessStartInfo Info = new ProcessStartInfo();
+                Info.Arguments = "/C ping 127.0.0.1 -n 2 && \"" + Application.ExecutablePath + "\"";
+                Info.WindowStyle = ProcessWindowStyle.Hidden;
+                Info.CreateNoWindow = true;
+                Info.FileName = "cmd.exe";
+                Process.Start(Info);
+                Application.Exit();
             }
+        }
+
+        private async Task ShowConnectedNodes(string ipAddress)
+        {
+            IpAddressManagement ipManagement = new IpAddressManagement();
+            NodesList.Items.AddRange(await ipManagement.StartGettingHosts(ipAddress));
         }
 
         private void showNodesButton_Click(object sender, EventArgs e)
@@ -251,9 +286,9 @@ namespace LocalNetworkHardwareManagement
             infoForm.ShowDialog();
         }
 
-        private void ConnectedIPsTimer_Tick(object sender, EventArgs e)
+        private async void ConnectedIPsTimer_Tick(object sender, EventArgs e)
         {
-            LoadLocalIPs();
+            await ShowConnectedNodes(_serverIP.ToString());
         }
 
         private void NotifyIcon1_DoubleClick(object sender, EventArgs e)
