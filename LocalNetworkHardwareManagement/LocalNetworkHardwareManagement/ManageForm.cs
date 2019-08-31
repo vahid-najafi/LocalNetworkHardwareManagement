@@ -112,31 +112,6 @@ namespace LocalNetworkHardwareManagement
 
         #endregion
 
-        #region Menu Icon
-
-
-        private void MenuIcon_MouseEnter(object sender, EventArgs e)
-        {
-            menuIcon.BackgroundImage = Properties.Resources.line_menu_red;
-            this.Cursor = Cursors.Hand;
-        }
-
-        private void MenuIcon_MouseLeave(object sender, EventArgs e)
-        {
-            menuIcon.BackgroundImage = Properties.Resources.line_menu_white;
-            this.Cursor = Cursors.Default;
-        }
-
-        private void MenuIcon_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                mainMenu.Show(this.PointToScreen(e.Location));
-            }
-        }
-
-        #endregion
-
         #region Form Load
 
         private void ManageForm_Load(object sender, EventArgs e)
@@ -148,6 +123,7 @@ namespace LocalNetworkHardwareManagement
 
         private async Task UpdateLocalNodesInfo()
         {
+            //Getting connected systems
             IpAddressManagement ipManagement = new IpAddressManagement();
             var localIps = await ipManagement.StartGettingHosts(_ipAddress);
 
@@ -155,16 +131,19 @@ namespace LocalNetworkHardwareManagement
             {
                 foreach (string ip in localIps)
                 {
+                    //Starting client
                     AsynchronousClient client = new AsynchronousClient();
                     string recievedMessage = client.StartClient("/getshort", ip);
 
                     if (recievedMessage.Contains("<system>"))
                     {
+                        //Get short system model
                         ShortSystemModel systemModel =
                             ManageSystemInformations.ConvertMessageToShortSystemModel(recievedMessage);
 
                         systemModel.SystemIp = ip;
 
+                        //Adding system to data grid view
                         if (this.nodesDataGrid.InvokeRequired)
                         {
                             nodesDataGrid.Invoke(new Action(() =>
@@ -180,26 +159,20 @@ namespace LocalNetworkHardwareManagement
                     }
                     else
                     {
+                        //This happens when getting message from other system fails
+                        //Adding system to data grid view
                         if (this.nodesDataGrid.InvokeRequired)
                         {
-                            nodesDataGrid.Invoke(new Action(() => { nodesDataGrid.Rows.Add(ip, "", ""); }));
+                            nodesDataGrid.Invoke(new Action(() =>
+                            {
+                                nodesDataGrid.Rows.Add(ip, "", "");
+                            }));
                         }
                         else
                         {
                             nodesDataGrid.Rows.Add(ip, "", "");
                         }
                     }
-
-
-                }
-
-                if (this.nodesDataGrid.InvokeRequired)
-                {
-                    nodesDataGrid.Invoke(new Action(() => { nodesDataGrid.Rows.Add("123.123.1.1", "TestData", "TestData"); }));
-                }
-                else
-                {
-                    nodesDataGrid.Rows.Add("123.123.1.1", "TestData", "TestData");
                 }
             });
         }

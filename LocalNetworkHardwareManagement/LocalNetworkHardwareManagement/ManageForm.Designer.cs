@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TitlePanel = new System.Windows.Forms.Panel();
-            this.menuIcon = new System.Windows.Forms.PictureBox();
             this.mainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showSystemInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showActivitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +54,6 @@
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpuCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TitlePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).BeginInit();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
             this.panel2.SuspendLayout();
@@ -65,7 +63,6 @@
             // TitlePanel
             // 
             this.TitlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.TitlePanel.Controls.Add(this.menuIcon);
             this.TitlePanel.Controls.Add(this.ExitButton);
             this.TitlePanel.Controls.Add(this.TitleLabel);
             this.TitlePanel.Controls.Add(this.TitleIcon);
@@ -77,18 +74,6 @@
             this.TitlePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseDown);
             this.TitlePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseMove);
             this.TitlePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseUp);
-            // 
-            // menuIcon
-            // 
-            this.menuIcon.BackgroundImage = global::LocalNetworkHardwareManagement.Properties.Resources.line_menu_white;
-            this.menuIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.menuIcon.ContextMenuStrip = this.mainMenu;
-            this.menuIcon.Location = new System.Drawing.Point(51, 17);
-            this.menuIcon.Name = "menuIcon";
-            this.menuIcon.Size = new System.Drawing.Size(28, 26);
-            this.menuIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.menuIcon.TabIndex = 7;
-            this.menuIcon.TabStop = false;
             // 
             // mainMenu
             // 
@@ -355,7 +340,6 @@
             this.Load += new System.EventHandler(this.ManageForm_Load);
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).EndInit();
             this.mainMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -376,7 +360,6 @@
         private System.Windows.Forms.Button sowSelectedSystemButton;
         private System.Windows.Forms.Label ipLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox menuIcon;
         private System.Windows.Forms.Label pcNameLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn ipCol;

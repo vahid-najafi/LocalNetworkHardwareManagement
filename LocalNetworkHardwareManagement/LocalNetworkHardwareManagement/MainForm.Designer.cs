@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.menuIcon = new System.Windows.Forms.PictureBox();
             this.mainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showSystemInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showActivitiesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showNodesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
@@ -53,10 +52,17 @@
             this.ServerStartButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ConnectedIPsTimer = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.about2MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exit2MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).BeginInit();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).BeginInit();
+            this.notifyMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitlePanel
@@ -98,14 +104,12 @@
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showSystemInfoMenuItem,
-            this.showActivitiesMenuItem,
             this.showNodesMenuItem,
-            this.settingsMenuItem,
             this.aboutMenuItem,
             this.exitMenuItem});
             this.mainMenu.Name = "contextMenuStrip1";
             this.mainMenu.ShowImageMargin = false;
-            this.mainMenu.Size = new System.Drawing.Size(249, 220);
+            this.mainMenu.Size = new System.Drawing.Size(249, 148);
             // 
             // showSystemInfoMenuItem
             // 
@@ -113,13 +117,7 @@
             this.showSystemInfoMenuItem.Name = "showSystemInfoMenuItem";
             this.showSystemInfoMenuItem.Size = new System.Drawing.Size(248, 36);
             this.showSystemInfoMenuItem.Text = "نمایش جزئیات سیستم خود";
-            // 
-            // showActivitiesMenuItem
-            // 
-            this.showActivitiesMenuItem.ForeColor = System.Drawing.Color.White;
-            this.showActivitiesMenuItem.Name = "showActivitiesMenuItem";
-            this.showActivitiesMenuItem.Size = new System.Drawing.Size(248, 36);
-            this.showActivitiesMenuItem.Text = "نمایش فعالیت های اخیر برنامه";
+            this.showSystemInfoMenuItem.Click += new System.EventHandler(this.ShowSystemInfoMenuItem_Click);
             // 
             // showNodesMenuItem
             // 
@@ -130,15 +128,7 @@
             this.showNodesMenuItem.Name = "showNodesMenuItem";
             this.showNodesMenuItem.Size = new System.Drawing.Size(248, 36);
             this.showNodesMenuItem.Text = "نمایش جزئیات گره های متصل";
-            // 
-            // settingsMenuItem
-            // 
-            this.settingsMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.settingsMenuItem.Font = new System.Drawing.Font("B Mitra", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.settingsMenuItem.ForeColor = System.Drawing.Color.White;
-            this.settingsMenuItem.Name = "settingsMenuItem";
-            this.settingsMenuItem.Size = new System.Drawing.Size(248, 36);
-            this.settingsMenuItem.Text = "تنظیمات برنامه";
+            this.showNodesMenuItem.Click += new System.EventHandler(this.ShowNodesMenuItem_Click);
             // 
             // aboutMenuItem
             // 
@@ -147,6 +137,7 @@
             this.aboutMenuItem.Name = "aboutMenuItem";
             this.aboutMenuItem.Size = new System.Drawing.Size(248, 36);
             this.aboutMenuItem.Text = "درباره برنامه نویس";
+            this.aboutMenuItem.Click += new System.EventHandler(this.AboutMenuItem_Click);
             // 
             // exitMenuItem
             // 
@@ -154,6 +145,7 @@
             this.exitMenuItem.Name = "exitMenuItem";
             this.exitMenuItem.Size = new System.Drawing.Size(248, 36);
             this.exitMenuItem.Text = "خروج";
+            this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // TitleIcon
             // 
@@ -329,6 +321,59 @@
             this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // ConnectedIPsTimer
+            // 
+            this.ConnectedIPsTimer.Interval = 60000;
+            this.ConnectedIPsTimer.Tick += new System.EventHandler(this.ConnectedIPsTimer_Tick);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.notifyMenu;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "مدیریت سخت افزاری شبکه";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.NotifyIcon1_DoubleClick);
+            // 
+            // notifyMenu
+            // 
+            this.notifyMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.notifyMenu.Font = new System.Drawing.Font("B Mitra", 11F);
+            this.notifyMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.notifyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showMenuItem,
+            this.about2MenuItem,
+            this.exit2MenuItem});
+            this.notifyMenu.Name = "notifyMenu";
+            this.notifyMenu.ShowImageMargin = false;
+            this.notifyMenu.Size = new System.Drawing.Size(174, 112);
+            // 
+            // showMenuItem
+            // 
+            this.showMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.showMenuItem.ForeColor = System.Drawing.Color.White;
+            this.showMenuItem.Name = "showMenuItem";
+            this.showMenuItem.Size = new System.Drawing.Size(173, 36);
+            this.showMenuItem.Text = "نمایش برنامه";
+            this.showMenuItem.Click += new System.EventHandler(this.ShowMenuItem_Click);
+            // 
+            // about2MenuItem
+            // 
+            this.about2MenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.about2MenuItem.ForeColor = System.Drawing.Color.White;
+            this.about2MenuItem.Name = "about2MenuItem";
+            this.about2MenuItem.Size = new System.Drawing.Size(173, 36);
+            this.about2MenuItem.Text = "درباره برنامه نویس";
+            this.about2MenuItem.Click += new System.EventHandler(this.About2MenuItem_Click);
+            // 
+            // exit2MenuItem
+            // 
+            this.exit2MenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.exit2MenuItem.ForeColor = System.Drawing.Color.White;
+            this.exit2MenuItem.Name = "exit2MenuItem";
+            this.exit2MenuItem.Size = new System.Drawing.Size(173, 36);
+            this.exit2MenuItem.Text = "خروج";
+            this.exit2MenuItem.Click += new System.EventHandler(this.Exit2MenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -349,6 +394,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TitlePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -359,6 +405,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.menuIcon)).EndInit();
             this.mainMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TitleIcon)).EndInit();
+            this.notifyMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,12 +430,16 @@
         private System.Windows.Forms.Button ServerStartButton;
         private System.Windows.Forms.PictureBox menuIcon;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showNodesMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showActivitiesMenuItem;
         private System.Windows.Forms.ContextMenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem showSystemInfoMenuItem;
+        private System.Windows.Forms.Timer ConnectedIPsTimer;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip notifyMenu;
+        private System.Windows.Forms.ToolStripMenuItem showMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem about2MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exit2MenuItem;
     }
 }
