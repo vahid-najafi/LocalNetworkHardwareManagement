@@ -31,6 +31,7 @@ namespace LocalNetworkHardwareManagement
             {
                 if (!_isOwned)
                 {
+
                     MessageBox.Show("آیپی سیستم مقصد نا معتبر می باشد", "خطا",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();

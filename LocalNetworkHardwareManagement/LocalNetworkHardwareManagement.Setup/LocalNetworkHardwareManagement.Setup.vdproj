@@ -94,18 +94,6 @@
         "Entry"
         {
         "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
-        "OwnerKey" = "8:_78FFD4CBA49A440091B0889B7A0DEA15"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
-        "OwnerKey" = "8:_59F0E9E405EE489D8016C9E22E88A7B1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
         "OwnerKey" = "8:_C2AB1D973A5200CAC038F5D00EE1DA10"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -113,6 +101,18 @@
         {
         "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
         "OwnerKey" = "8:_D5A2EB2666CE438994CE76176CF11413"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
+        "OwnerKey" = "8:_78FFD4CBA49A440091B0889B7A0DEA15"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
+        "OwnerKey" = "8:_59F0E9E405EE489D8016C9E22E88A7B1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,6 +160,18 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D5A2EB2666CE438994CE76176CF11413"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_78FFD4CBA49A440091B0889B7A0DEA15"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_59F0E9E405EE489D8016C9E22E88A7B1"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -179,18 +191,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C2AB1D973A5200CAC038F5D00EE1DA10"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D5A2EB2666CE438994CE76176CF11413"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_78FFD4CBA49A440091B0889B7A0DEA15"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -217,6 +217,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -233,6 +249,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -765,25 +789,25 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:LocalNetworkHardwareManagement.Setup"
+        "ProductName" = "8:Local Network Hardware Management"
         "ProductCode" = "8:{93D7C638-7131-4D16-BE0F-48579B271F3D}"
         "PackageCode" = "8:{331831B7-BDD6-4A29-AB4C-BCDC249E39D7}"
         "UpgradeCode" = "8:{F4D1B2CD-7A0E-4B4F-AB34-805BAD2C1AA4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:Vahid Najafi"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:LocalNetworkHardwareManagement.Setup"
+        "Title" = "8:Local Network Hardware Management"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Vahid Najafi"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:https://github.com/svahidnajafi"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
