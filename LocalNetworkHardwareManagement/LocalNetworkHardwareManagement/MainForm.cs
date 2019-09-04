@@ -172,6 +172,8 @@ namespace LocalNetworkHardwareManagement
         {
             ChangeButtonsEnable(false);
 
+            ActivitiesText.Text = "در حال بارگزاری..." + Environment.NewLine + ActivitiesText.Text;
+
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
 
             //checking global system information in startup
@@ -238,7 +240,9 @@ namespace LocalNetworkHardwareManagement
                             //Starting Server
                             Task.Run(() =>
                             {
-                                AsynchronousSocketListener.StartListening();
+                                AsynchronousSocketListener server 
+                                    = new AsynchronousSocketListener();
+                                server.StartListening(ip.ToString());
                             });
                             _serverIP = ip;
                             ActivitiesText.Text = "سرور استارت شد." + Environment.NewLine + ActivitiesText.Text;

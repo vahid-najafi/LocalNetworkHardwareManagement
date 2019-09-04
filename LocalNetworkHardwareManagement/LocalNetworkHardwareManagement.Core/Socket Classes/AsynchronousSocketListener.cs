@@ -10,13 +10,14 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
     public class AsynchronousSocketListener
     {
         // Thread signal.  
-        public static ManualResetEvent allDone = new ManualResetEvent(false);
+        private ManualResetEvent _allDone;
 
         public AsynchronousSocketListener()
         {
+            _allDone = new ManualResetEvent(false);
         }
 
-        public static void StartListening(string myIP = "127.0.0.1")
+        public void StartListening(string myIP = "127.0.0.1")
         {
             // Establish the local endpoint for the socket.  
             // The DNS name of the computer  
@@ -38,7 +39,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
                 while (true)
                 {
                     // Set the event to nonsignaled state.  
-                    allDone.Reset();
+                    _allDone.Reset();
 
                     // Start an asynchronous socket to listen for connections.
                     listener.BeginAccept(
@@ -46,7 +47,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
                         listener);
 
                     // Wait until a connection is made before continuing.  
-                    allDone.WaitOne();
+                    _allDone.WaitOne();
                 }
 
             }
@@ -54,15 +55,12 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             {
                 //Console.WriteLine(e.Message);
             }
-
-            //In case any error happens start it all over again
-            StartListening();
         }
 
-        public static void AcceptCallback(IAsyncResult ar)
+        public  void AcceptCallback(IAsyncResult ar)
         {
             // Signal the main thread to continue.  
-            allDone.Set();
+            _allDone.Set();
 
             // Get the socket that handles the client request.  
             Socket listener = (Socket) ar.AsyncState;
@@ -75,7 +73,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
                 new AsyncCallback(ReadCallback), state);
         }
 
-        public static void ReadCallback(IAsyncResult ar)
+        public  void ReadCallback(IAsyncResult ar)
         {
             String content = String.Empty;
 
@@ -119,7 +117,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             }
         }
 
-        private static void Send(Socket handler, String data)
+        private  void Send(Socket handler, String data)
         {
             // Convert the string data to byte data using ASCII encoding.  
             byte[] byteData = Encoding.UTF8.GetBytes(data);
@@ -129,7 +127,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
                 new AsyncCallback(SendCallback), handler);
         }
 
-        private static void SendCallback(IAsyncResult ar)
+        private  void SendCallback(IAsyncResult ar)
         {
             try
             {

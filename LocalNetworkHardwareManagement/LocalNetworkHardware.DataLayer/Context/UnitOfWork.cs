@@ -15,16 +15,22 @@ namespace LocalNetworkHardware.DataLayer.Context
         public UnitOfWork()
         {
             db = new LocalNetworkHardwareManagement_DBEntities();
-            string commonData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string pathToDBFile = commonData +
-                @"\Local Network Hardware Management\" +
-                "LocalNetworkHardwareManagement_DB.mdf";
 
-            db.ChangeDatabase("LocalNetworkHardwareManagement_DB",
-                @"(LocalDB)\MSSQLLocalDB", pathToDBFile,
-                @"res://*/DbModel.csdl|res://*/DbModel.ssdl|res://*/DbModel.msl",
-                true,
-                "LocalNetworkHardwareManagement_DBEntities");
+            //**************************
+            //This code is to change connection string of database
+            //Should Be Used For Application Deployment
+            //**************************
+
+            //string commonData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            //string pathToDBFile = commonData +
+            //    @"\Local Network Hardware Management\" +
+            //    "LocalNetworkHardwareManagement_DB.mdf";
+
+            //db.ChangeDatabase("LocalNetworkHardwareManagement_DB",
+            //    @"(LocalDB)\MSSQLLocalDB", pathToDBFile,
+            //    @"res://*/DbModel.csdl|res://*/DbModel.ssdl|res://*/DbModel.msl",
+            //    true,
+            //    "LocalNetworkHardwareManagement_DBEntities");
         }
 
 
