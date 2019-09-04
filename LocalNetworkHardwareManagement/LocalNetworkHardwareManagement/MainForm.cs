@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -167,6 +170,8 @@ namespace LocalNetworkHardwareManagement
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            ChangeButtonsEnable(false);
+
             ProgramStartupHelper.CheckApplicationStartupRegistry(Application.ExecutablePath);
 
             //checking global system information in startup
@@ -179,6 +184,8 @@ namespace LocalNetworkHardwareManagement
 
             //Getting system ips
             LoadLocalIPs();
+
+            ChangeButtonsEnable(true);
 
             //Starting server to communicate with other nodes
             //if (!string.IsNullOrEmpty(Properties.Settings.Default.LocalNetworkIP))
@@ -196,6 +203,12 @@ namespace LocalNetworkHardwareManagement
             var localIps = IpAddressManagement.GetLocalIPv4Addresses().ToArray();
             LocalIPsCombo.Items.AddRange(localIps);
             LocalIPsCombo.SelectedIndex = 0;
+        }
+
+        private void ChangeButtonsEnable(bool isEnabled)
+        {
+            showNodesButton.Enabled = btnShowSystemInfo.Enabled =
+            ServerStartButton.Enabled = isEnabled;
         }
 
 
@@ -266,6 +279,7 @@ namespace LocalNetworkHardwareManagement
 
         private async Task ShowConnectedNodes(string ipAddress)
         {
+            NodesList.Items.Clear();
             IpAddressManagement ipManagement = new IpAddressManagement();
             NodesList.Items.AddRange(await ipManagement.StartGettingHosts(ipAddress));
         }

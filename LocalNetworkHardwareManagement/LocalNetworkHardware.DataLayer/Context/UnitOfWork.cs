@@ -10,8 +10,22 @@ namespace LocalNetworkHardware.DataLayer.Context
 {
     public class UnitOfWork : IDisposable
     {
-        LocalNetworkHardwareManagement_DBEntities db =
-            new LocalNetworkHardwareManagement_DBEntities();
+        LocalNetworkHardwareManagement_DBEntities db;
+
+        public UnitOfWork()
+        {
+            db = new LocalNetworkHardwareManagement_DBEntities();
+            string commonData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string pathToDBFile = commonData +
+                @"\Local Network Hardware Management\" +
+                "LocalNetworkHardwareManagement_DB.mdf";
+
+            db.ChangeDatabase("LocalNetworkHardwareManagement_DB",
+                @"(LocalDB)\MSSQLLocalDB", pathToDBFile,
+                @"res://*/DbModel.csdl|res://*/DbModel.ssdl|res://*/DbModel.msl",
+                true,
+                "LocalNetworkHardwareManagement_DBEntities");
+        }
 
 
 

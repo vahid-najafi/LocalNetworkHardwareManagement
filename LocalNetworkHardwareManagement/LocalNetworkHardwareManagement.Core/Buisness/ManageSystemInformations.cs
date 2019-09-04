@@ -707,6 +707,9 @@ namespace LocalNetworkHardwareManagement.Core.Buisness
             int actTo = message.LastIndexOf("</activties>");
             string actInfo = message.Substring(actFrom, actTo - actFrom);
 
+            if (string.IsNullOrEmpty(actInfo))
+                return activitiesList.ToArray();
+
             string[] actArray = actInfo
                 .Split(new string[] { "<split>" }, StringSplitOptions.RemoveEmptyEntries);
 

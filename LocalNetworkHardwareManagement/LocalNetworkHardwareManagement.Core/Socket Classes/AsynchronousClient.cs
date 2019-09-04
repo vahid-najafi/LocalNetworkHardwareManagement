@@ -49,6 +49,8 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
 
+                operationDone.Reset();
+
                 return _response;
 
             }
@@ -76,6 +78,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             catch
             {
                 _response = "Connection Faild";
+                operationDone.Set();
             }
         }
 
@@ -94,6 +97,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             catch
             {
                 _response = "No Message Recieved.";
+                operationDone.Set();
             }
         }
 
@@ -160,6 +164,7 @@ namespace LocalNetworkHardwareManagement.Core.Socket_Classes
             catch
             {
                 _response = "No Message Sent.";
+                operationDone.Set();
             }
         }
     }

@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_18867683A26C4D8B863D0DF46256F846"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2111E5C3C3FD41A5BDE21891B36B37CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_23676AC6C3A14A99BC4A39E764E64D6B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2C6B59543B0D44B093D84BCABD66FDAD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -93,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BB0130ECCF974A0188696CCB876FF282"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BC9C916916992880CBEF3E3E34AD0AE7"
         "OwnerKey" = "8:_C2AB1D973A5200CAC038F5D00EE1DA10"
         "MsmSig" = "8:_UNDEFINED"
@@ -137,12 +143,6 @@
         {
         "MsmKey" = "8:_C2AB1D973A5200CAC038F5D00EE1DA10"
         "OwnerKey" = "8:_59F0E9E405EE489D8016C9E22E88A7B1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C5DE5CFB9D9046B38E461AACAF1EE7F8"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -256,6 +256,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -301,26 +309,6 @@
                 }
             "SourcePath" = "8:..\\LocalNetworkHardwareManagement\\bin\\Debug\\LocalNetworkHardwareManagement.Core.dll"
             "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_7DD78648F00A46BAB692BEE9F053BB96"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_18867683A26C4D8B863D0DF46256F846"
-            {
-            "SourcePath" = "8:..\\LocalNetworkHardwareManagement\\bin\\Debug\\LocalNetworkHardwareManagement_DB.mdf"
-            "TargetName" = "8:LocalNetworkHardwareManagement_DB.mdf"
             "Tag" = "8:"
             "Folder" = "8:_7DD78648F00A46BAB692BEE9F053BB96"
             "Condition" = "8:"
@@ -394,6 +382,26 @@
             "TargetName" = "8:LocalNetworkHardwareManagement.Core.pdb"
             "Tag" = "8:"
             "Folder" = "8:_7DD78648F00A46BAB692BEE9F053BB96"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2C6B59543B0D44B093D84BCABD66FDAD"
+            {
+            "SourcePath" = "8:..\\LocalNetworkHardware.DataLayer\\LocalNetworkHardwareManagement_DB.mdf"
+            "TargetName" = "8:LocalNetworkHardwareManagement_DB.mdf"
+            "Tag" = "8:"
+            "Folder" = "8:_E99329E1D77B4CB5814C4202F7B91F80"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -601,6 +609,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB0130ECCF974A0188696CCB876FF282"
+            {
+            "SourcePath" = "8:..\\LocalNetworkHardware.DataLayer\\LocalNetworkHardwareManagement_DB_log.ldf"
+            "TargetName" = "8:LocalNetworkHardwareManagement_DB_log.ldf"
+            "Tag" = "8:"
+            "Folder" = "8:_E99329E1D77B4CB5814C4202F7B91F80"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BC9C916916992880CBEF3E3E34AD0AE7"
             {
             "AssemblyRegister" = "3:1"
@@ -683,26 +711,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5DE5CFB9D9046B38E461AACAF1EE7F8"
-            {
-            "SourcePath" = "8:..\\LocalNetworkHardwareManagement\\bin\\Debug\\LocalNetworkHardwareManagement_DB_log.ldf"
-            "TargetName" = "8:LocalNetworkHardwareManagement_DB_log.ldf"
-            "Tag" = "8:"
-            "Folder" = "8:_7DD78648F00A46BAB692BEE9F053BB96"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5A2EB2666CE438994CE76176CF11413"
             {
             "AssemblyRegister" = "3:1"
@@ -740,9 +748,31 @@
         }
         "Folder"
         {
+            "{1525181F-901A-416C-8A58-119130FE478E}:_21255EA94D2B4A78BFE0790075FAE3DD"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E99329E1D77B4CB5814C4202F7B91F80"
+                    {
+                    "Name" = "8:Local Network Hardware Management"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_B65293149010483F9E840E35C61C8A5A"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_7DD78648F00A46BAB692BEE9F053BB96"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]Local Network Hardware Management"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -791,7 +821,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Local Network Hardware Management"
         "ProductCode" = "8:{93D7C638-7131-4D16-BE0F-48579B271F3D}"
-        "PackageCode" = "8:{331831B7-BDD6-4A29-AB4C-BCDC249E39D7}"
+        "PackageCode" = "8:{7B111FE2-8CEF-4B02-AAF0-2D8256C46DEB}"
         "UpgradeCode" = "8:{F4D1B2CD-7A0E-4B4F-AB34-805BAD2C1AA4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -808,7 +838,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://github.com/svahidnajafi"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_5D4B9005FB00464E8D3A03DF34A0A70A"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
